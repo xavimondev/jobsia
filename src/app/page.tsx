@@ -1,4 +1,11 @@
+import { redirect } from 'next/navigation'
+
 export default function Home() {
+  async function handleSubmit(data: FormData) {
+    'use server'
+    const query = data.get('search') as string
+    redirect(`/jobs?q=${encodeURIComponent(query)}`)
+  }
   return (
     <main className='p-6 min-h-screen h-full w-full grid place-items-center'>
       <section className='mx-auto flex justify-center items-center flex-col py-8 sm:py-10 lg:py-14'>
@@ -11,7 +18,10 @@ export default function Home() {
         <h2 className='text-[#bac8de] italic mb-8 text-sm sm:text-lg max-w-4xl text-center'>
           Disponible para desarrolladores, administradores de base de datos y diseñadores web
         </h2>
-        <form className='max-w-4xl flex flex-col gap-5 md:flex-row md:items-center w-full mb-6'>
+        <form
+          action={handleSubmit}
+          className='max-w-4xl flex flex-col gap-5 md:flex-row md:items-center w-full mb-6'
+        >
           <div className='relative w-full'>
             <div className='flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none'>
               <svg
@@ -30,6 +40,7 @@ export default function Home() {
             </div>
             <input
               type='search'
+              name='search'
               className='bg-[#232234] 
                 border-none 
                 text-white 
