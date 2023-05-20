@@ -15,13 +15,16 @@ export function JobOfferDetails({ jobOffer }: JobOfferDetailsProps) {
     <>
       <div className='hidden lg:flex flex-col gap-5 rounded-xl bg-[#1d1c2d] w-full h-full p-5 animate-fadeIn'>
         <div className='flex flex-row gap-2 items-center'>
-          <Image
-            src={jobOffer.company.logo!}
-            alt='Leading'
-            width={52}
-            height={52}
-            className='rounded-sm hidden lg:block'
-          />
+          {jobOffer.company.logo && (
+            <Image
+              src={jobOffer.company.logo}
+              alt='Leading'
+              width={52}
+              height={52}
+              className='rounded-sm hidden lg:block'
+            />
+          )}
+
           <h2 className='font-bold text-white text-base lg:text-lg max-w-4xl'>{jobOffer.title}</h2>
         </div>
         <JobOfferDetailItem
