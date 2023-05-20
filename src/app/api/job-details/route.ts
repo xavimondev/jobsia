@@ -28,7 +28,7 @@ export async function GET(request: Request) {
     title,
     profile
   } = await data.json()
-  //`${country.value}, ${province.value}`
+
   const location: Location = {
     country: country.value,
     province: province.value
@@ -41,7 +41,7 @@ export async function GET(request: Request) {
   }
 
   const salaryDesc =
-    minPay.amountValue === '' || maxPay.amountValue === ''
+    minPay == null || maxPay == null
       ? 'No especificado'
       : `${minPay.amountValue} - ${maxPay.amountValue}`
 
