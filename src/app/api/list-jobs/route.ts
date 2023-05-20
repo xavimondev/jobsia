@@ -62,7 +62,6 @@ export async function GET(request: Request) {
         country,
         province
       },
-      teleworking: 'Hibrido',
       minRequirements: content,
       salaryDesc,
       experienceMin: experiencemin
