@@ -23,7 +23,6 @@ export default function JobsResults() {
   const { setQueryParams } = useQueryParams<{ q: string }>()
 
   useEffect(() => {
-    //console.log(query)
     if (!query) return
 
     setIsLoading({
