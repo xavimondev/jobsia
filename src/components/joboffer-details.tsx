@@ -27,7 +27,7 @@ export function JobOfferDetails({ jobOffer }: JobOfferDetailsProps) {
         <JobOfferDetailItem
           content={{
             subtitle: 'Requerimientos',
-            value: jobOffer.minRequirements || 'No se ha especificado'
+            value: jobOffer.minRequirements || 'No especificado'
           }}
         >
           <CheckIc width={18} height={18} />
