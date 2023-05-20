@@ -1,25 +1,96 @@
-async function getJobs(q: string) {
-  console.log(q)
-  // const res = await fetch('https://api.example.com/...')
-  // // The return value is *not* serialized
-  // // You can return Date, Map, Set, etc.
-  // // Recommendation: handle errors
-  // if (!res.ok) {
-  //   // This will activate the closest `error.js` Error Boundary
-  //   throw new Error('Failed to fetch data')
-  // }
-  // return res.json()
-}
+'use client'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
+import { JobOffer } from '@/types'
+import { getJobOffers } from '@/services/getJobOffers'
+import useQueryParams from '@/hooks/useQueryParams'
+import { NotJobSelected, NotResultsFound } from '@/components/empty-state'
+import { RingLoader } from '@/components/loaders'
+import { ListOffers } from '@/components/list-offers'
+import { JobOfferDetails } from '@/components/joboffer-details'
+import { SearchForm } from '@/components/search-form'
 
-export default async function JobsResults({
-  searchParams: { q }
-}: {
-  searchParams: { q: string }
-}) {
-  const data = await getJobs(q)
+export default function JobsResults() {
+  const searchParams = useSearchParams()
+  const query = searchParams.get('q') as string
+  const [jobResults, setJobResults] = useState<JobOffer[]>([])
+  const [jobDetails, setJobDetails] = useState<JobOffer | undefined>(undefined)
+  const [isLoading, setIsLoading] = useState<{ [key: string]: boolean }>({
+    jobs: true,
+    jobdetails: false
+  })
+  const { setQueryParams } = useQueryParams<{ q: string }>()
+
+  useEffect(() => {
+    //console.log(query)
+    if (!query) return
+
+    setIsLoading({
+      ...isLoading,
+      jobs: true
+    })
+
+    getJobOffers(query)
+      .then((response) => {
+        const offers = response.data
+        setJobResults(offers)
+      })
+      .catch((error) => console.error(error))
+      .finally(() => {
+        setIsLoading({
+          ...isLoading,
+          jobs: false
+        })
+      })
+  }, [query])
+
+  const getJobDetails = async (id: string) => {
+    setIsLoading({
+      ...isLoading,
+      jobdetails: true
+    })
+    setJobDetails(undefined)
+    const response = await fetch(`/api/job-details?id=${id}`)
+    const data = await response.json()
+    setJobDetails(data)
+    setIsLoading({
+      ...isLoading,
+      jobdetails: false
+    })
+  }
+
+  const onSubmitHandler = async (query: string) => {
+    // Updating query params
+    setQueryParams({
+      q: query
+    })
+    setJobDetails(undefined)
+  }
+
   return (
-    <section>
-      <h1>Esta es una muestra que debemos mejorar ciertos resultados de la aplicacion</h1>
-    </section>
+    <div className='p-6'>
+      <section className='flex mb-7'>
+        <div className='flex gap-6 w-full items-center'>
+          <Link
+            href='/'
+            className='max-w-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#ff8b42] to-[#8b36bb] font-bold text-xl hidden sm:block'
+          >
+            jobs.ia
+          </Link>
+          <SearchForm onSubmit={onSubmitHandler} enteredQuery={query} />
+        </div>
+      </section>
+      {isLoading.jobs && <RingLoader msg='Obteniendo ofertas de trabajo' />}
+      {!isLoading.jobs && jobResults.length === 0 && <NotResultsFound />}
+      {!isLoading.jobs && jobResults.length > 0 && (
+        <section className='flex gap-5 w-full'>
+          <ListOffers jobDetailsFn={getJobDetails} offers={jobResults} />
+          {isLoading.jobdetails && <RingLoader msg='Obteniendo detalles de la oferta' />}
+          {!jobDetails && !isLoading.jobdetails && <NotJobSelected />}
+          <JobOfferDetails jobOffer={jobDetails} />
+        </section>
+      )}
+    </div>
   )
 }
