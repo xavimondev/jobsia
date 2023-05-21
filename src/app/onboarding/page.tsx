@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { DayMomentNight } from '@/components/illustrations'
 
 export default function Onboarding() {
@@ -44,6 +45,19 @@ export default function Onboarding() {
               <span className='text-yellow-300 font-bold'>puntaje</span> necesario para alcanzar la
               fase final.
             </p>
+          </div>
+          <div className='p-3 border rounded-lg text-blue-400 border-blue-300 mt-4'>
+            <div className='flex items-center justify-between'>
+              <span className='font-semibold'>
+                Para empezar la prueba técnica necesitas autenticarte
+              </span>
+              <Link
+                href={`https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV&client_id=${process.env.INFOJOBS_CLIENT_ID}&redirect_uri=${process.env.INFOJOBS_REDIRECT_URI}&response_type=code`}
+                className='bg-transparent border rounded-lg text-sm px-3 py-2 text-center hover:bg-blue-600 border-blue-600 text-blue-400 hover:text-white '
+              >
+                Iniciar Sesión
+              </Link>
+            </div>
           </div>
         </div>
         <div className='w-full'>
