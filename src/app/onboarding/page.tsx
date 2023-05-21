@@ -52,7 +52,7 @@ export default function Onboarding() {
                 Para empezar la prueba técnica necesitas autenticarte
               </span>
               <Link
-                href={`https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV&client_id=${process.env.INFOJOBS_CLIENT_ID}&redirect_uri=${process.env.INFOJOBS_REDIRECT_URI}&response_type=code`}
+                href={`https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV,CANDIDATE_READ_CURRICULUM_CVTEXT,CANDIDATE_READ_CURRICULUM_EDUCATION,CANDIDATE_READ_CURRICULUM_EXPERIENCE,COVER_LETTER_READ&client_id=${process.env.INFOJOBS_CLIENT_ID}&redirect_uri=${process.env.INFOJOBS_REDIRECT_URI}&response_type=code`}
                 className='bg-transparent border rounded-lg text-sm px-3 py-2 text-center hover:bg-blue-600 border-blue-600 text-blue-400 hover:text-white '
               >
                 Iniciar Sesión
