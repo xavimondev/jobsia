@@ -41,8 +41,9 @@ export async function middleware(request: NextRequest) {
     expires: new Date(Date.now() + tokens.expires_in * 1000),
     httpOnly: true
   })
+
   response.cookies.set('jobsia.refresh-token', tokens.refresh_token, {
-    expires: new Date(Date.now() + tokens.expires_in * 1000),
+    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
     httpOnly: true
   })
   return response
