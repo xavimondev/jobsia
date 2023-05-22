@@ -4,7 +4,7 @@ const nextConfig = {
     serverActions: true,
   },
   images: {
-    domains: ['multimedia.infojobs.net']
+    domains: ['multimedia.infojobs.net', 'www.infojobs.net']
   }
 }
 
