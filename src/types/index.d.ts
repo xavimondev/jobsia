@@ -27,3 +27,8 @@ export interface JobOffer {
   studiesMin?: string
   teleworking?: string
 }
+
+export interface InitialPermissions {
+  isMicrophoneEnabled: boolean
+  isAssistantEnabled: boolean
+}
