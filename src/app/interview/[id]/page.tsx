@@ -36,50 +36,46 @@ export default async function Interview({ params: { id } }: { params: { id: stri
   } = jobDetails
 
   const { id: jobOfferId, photo, name, fullName } = candidateDetails
-  console.log(candidateDetails)
+
   return (
     <div className='h-screen relative'>
       <div className='p-6 w-full'>
         <header className='border-b border-white border-opacity-10 flex justify-between items-center pb-4 mb-2'>
           <div className='flex flex-col gap-2'>
             <div className='flex gap-4 items-center'>
-              <h1 className='font-bold text-2xl xl:text-2xl text-white'>
+              <h1 className='font-bold text-xl xl:text-2xl text-white'>
                 Entrevista de trabajo para {title}
               </h1>
-              <span className='bg-blue-300 text-blue-600 p-1.5 rounded-md font-bold text-sm flex items-center gap-1'>
+              <span className='bg-blue-300 text-blue-600 p-1.5 rounded-md font-bold text-sm hidden xl:flex items-center gap-1'>
                 <div className='h-1.5 w-1.5 rounded-full bg-blue-600'></div> {categoryValue} -{' '}
                 {subcategoryValue}
               </span>
             </div>
-            <h2 className='font-semibold text-gray-400 text-xl'>de la empresa {companyName}</h2>
+            <h2 className='font-semibold text-gray-400 text-lg xl:text-xl'>
+              de la empresa {companyName}
+            </h2>
           </div>
           <div className='text-white flex items-center gap-2'>
             <h3
-              className='text-lg font-bold'
+              className='text-base xl:text-lg font-bold'
               dangerouslySetInnerHTML={{
                 __html: fullName
               }}
             />
             <Image
               src={photo}
-              width={34}
-              height={34}
+              width={32}
+              height={32}
               alt={`Foto de ${name}`}
-              className='rounded-full'
+              className='rounded-full w-6 h-6 xl:w-8 xl:h-8'
             />
           </div>
         </header>
         <div className='flex flex-row gap-4 mt-8'>
-          <div className='text-yellow-300 text-4xl w-1/2'>
+          <div className='text-yellow-300 text-xl xl:text-3xl w-1/2'>
             <p className='italic'>
               Como te identifica a ti mismo dentro de unos años y como crees que debo decir un texto
               largo que no debe exceder los 100 tokens
-            </p>
-          </div>
-          <div className='text-white text-3xl w-1/2'>
-            <p>
-              Soy una persona creativa que siempre está innovando, sin embargo debemos mejorar
-              ciertos aspectos de la lógica
             </p>
           </div>
         </div>
