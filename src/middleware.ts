@@ -3,12 +3,20 @@ import { INFOJOBS_AUTH } from '@/utils/constants'
 
 export async function middleware(request: NextRequest) {
   const access_token = request.cookies.has('jobsia.access-token')
-  // console.log('This is token', request.cookies.get('jobsia.access-token')?.value)
+  //console.log(request.cookies.get('jobsia.access-token')?.value)
+  // This means I already have access_token and I just need to continue
   if (access_token) return NextResponse.next()
 
+  // This means I'm gonna generate access_token for the first time
   const url = new URL(request.url)
-  const code = url.searchParams.get('code')
-  if (!code) return NextResponse.redirect(new URL('/onboarding', request.url))
+  const code = url.searchParams.get('code') as string
+
+  if (!code) {
+    // Redirect to onboarding page to let user get access_token
+    return NextResponse.redirect(new URL('/onboarding', request.url), {
+      status: 401
+    })
+  }
 
   const params = new URLSearchParams()
   params.append('grant_type', 'authorization_code')
@@ -25,8 +33,10 @@ export async function middleware(request: NextRequest) {
     }
   })
   const tokens = await data.json()
-  //console.log(tokens)
+
   const response = NextResponse.next()
+  // Saving tokens in cookies
+  // TODO: Change this for something more reliable
   response.cookies.set('jobsia.access-token', tokens.access_token, {
     expires: new Date(Date.now() + tokens.expires_in * 1000),
     httpOnly: true
@@ -35,7 +45,6 @@ export async function middleware(request: NextRequest) {
     expires: new Date(Date.now() + tokens.expires_in * 1000),
     httpOnly: true
   })
-  //console.log('This is the code', code)
   return response
 }
 
