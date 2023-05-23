@@ -24,7 +24,8 @@ export default function Onboarding() {
               ¿En que consiste la entrevista inicial?
             </h2>
             <p className='text-white text-lg'>
-              En este fase se evalua tu experiencia, habilidades y disponibilidad.
+              En este fase se evalua tu experiencia, habilidades y disponibilidad. Será un total de
+              10 preguntas.
             </p>
             <p className='text-white text-lg'>
               Al culminar esta fase, el asistente arrojará un{' '}
