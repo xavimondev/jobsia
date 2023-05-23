@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers'
 import Image from 'next/image'
+import { SkillsInterview } from '@/components/skills-interview'
 
 async function getJobOfferDetails(offerId: string) {
   const response = await fetch(`https://api.infojobs.net/api/7/offer/${offerId}`, {
@@ -30,11 +31,12 @@ export default async function Interview({ params: { id } }: { params: { id: stri
   const [jobDetails, candidateDetails] = await Promise.all([jobOfferData, candidateData])
   const {
     title,
+    city,
     category: { value: categoryValue },
     subcategory: { value: subcategoryValue },
     profile: { name: companyName }
   } = jobDetails
-
+  // console.log(jobDetails)
   const { id: jobOfferId, photo, name, fullName } = candidateDetails
 
   return (
@@ -71,14 +73,13 @@ export default async function Interview({ params: { id } }: { params: { id: stri
             />
           </div>
         </header>
-        <div className='flex flex-row gap-4 mt-8'>
-          <div className='text-yellow-300 text-xl xl:text-3xl w-1/2'>
-            <p className='italic'>
-              Como te identifica a ti mismo dentro de unos años y como crees que debo decir un texto
-              largo que no debe exceder los 100 tokens
-            </p>
-          </div>
-        </div>
+        <SkillsInterview
+          candidate={name}
+          position={title}
+          company={companyName}
+          category={categoryValue}
+          location={city}
+        />
       </div>
       <div className='bg-[#09080e] absolute bottom-0 py-3.5 w-full flex justify-center font-bold text-2xl'>
         <h4 className='text-green-400 mr-6'>PUNTAJE ACTUAL: 0</h4>
