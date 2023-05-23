@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { Interview } from '@/types'
+import { useStore } from '@/store'
 import { startInterview } from '@/services/interview'
 import { Speech } from './speech'
 // Testing: 307777a5f54cd09d3b6440ddf7d98a
@@ -20,7 +21,8 @@ export function SkillsInterview({ candidate, position, company, location }: Skil
     '¿Qué nos podrías contar sobre ti?'
   )
   const [userAnswer, setUserAnswer] = useState('')
-  const [interview, setInterview] = useState<Interview[]>([])
+  const updateInterview = useStore((state) => state.updateInterview)
+  const interview = useStore((state) => state.interview)
 
   useEffect(() => {
     // https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
@@ -60,7 +62,7 @@ export function SkillsInterview({ candidate, position, company, location }: Skil
       score,
       feedback
     }
-    setInterview((prevMessages) => [...prevMessages, messageInterview])
+    updateInterview(messageInterview)
     // Update current question
     setCurrentQuestion(next_question)
   }
