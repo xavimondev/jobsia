@@ -32,3 +32,10 @@ export interface InitialPermissions {
   isMicrophoneEnabled: boolean
   isAssistantEnabled: boolean
 }
+
+export interface Interview {
+  question: string
+  answer: string
+  score: number
+  feedback: string
+}
