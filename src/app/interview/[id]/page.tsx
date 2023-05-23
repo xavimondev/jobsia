@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
 import Image from 'next/image'
 import { SkillsInterview } from '@/components/skills-interview'
+import { StatsInterview } from '@/components/stats-interview'
 
 async function getJobOfferDetails(offerId: string) {
   const response = await fetch(`https://api.infojobs.net/api/7/offer/${offerId}`, {
@@ -81,10 +82,7 @@ export default async function Interview({ params: { id } }: { params: { id: stri
           location={city}
         />
       </div>
-      <div className='bg-[#09080e] absolute bottom-0 py-3.5 w-full flex justify-center font-bold text-2xl'>
-        <h4 className='text-green-400 mr-6'>PUNTAJE ACTUAL: 0</h4>
-        <h4 className='text-red-400'>PUNTAJE NECESARIO: 40</h4>
-      </div>
+      <StatsInterview />
     </div>
   )
 }
