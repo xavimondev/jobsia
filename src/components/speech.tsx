@@ -1,6 +1,8 @@
 'use client'
 import 'regenerator-runtime/runtime'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
+import { MicrophoneIc, StopVoiceIc } from './icons'
+import { Tooltip } from './ui/tooltip'
 
 export function Speech() {
   const commands = [
@@ -17,6 +19,7 @@ export function Speech() {
       language: 'es-US'
     })
   }
+
   const stopHandle = () => {
     SpeechRecognition.stopListening()
   }
@@ -26,16 +29,21 @@ export function Speech() {
   )} */
   return (
     <>
-      <div className='text-white text-xl xl:text-2xl w-1/2'>
-        <p>{transcript}</p>
-        <button className='p-2 bg-blue-400 text-white ml-2' onClick={handleListing}>
-          Turn on
-        </button>
-        {listening && (
-          <button className='p-2 bg-blue-400 text-white ml-2' onClick={stopHandle}>
-            Stop
-          </button>
-        )}
+      <div className='w-1/2 relative grid place-items-center'>
+        <p className='text-white text-xl xl:text-2xl'>{transcript}</p>
+        <div className='absolute bottom-5 left-1/2 transition duration-200 ease-in-out hover:scale-125'>
+          <Tooltip text={`${!listening ? 'Click para hablar' : 'Click para enviar tu respuesta'}`}>
+            {!listening ? (
+              <button onClick={handleListing}>
+                <MicrophoneIc className='text-red-400 h-16 w-16' />
+              </button>
+            ) : (
+              <button onClick={stopHandle}>
+                <StopVoiceIc className='text-red-400 h-16 w-16' />
+              </button>
+            )}
+          </Tooltip>
+        </div>
       </div>
     </>
   )
