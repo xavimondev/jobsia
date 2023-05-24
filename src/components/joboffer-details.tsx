@@ -80,7 +80,7 @@ export function JobOfferDetails({ jobOffer }: JobOfferDetailsProps) {
         <div className='flex pt-3 justify-end'>
           <Tooltip text='Al generar una entrevista pondrás a prueba tu experiencia en los conocimientos requeridos en la oferta de trabajo seleccionada'>
             <Link
-              href='/validation'
+              href={`/validation?offer=${jobOffer.id}`}
               className='text-green-400 text-base bg-green-700/[0.5] py-2 px-4 rounded-md flex items-center'
             >
               Empezar entrevista

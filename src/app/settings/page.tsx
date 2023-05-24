@@ -1,5 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useSearchParams } from 'next/navigation'
 import { InitialPermissions } from '@/types'
 import { CheckCircleIc, ErrorCircleIc } from '@/components/icons'
 import { CheckingSettings } from '@/components/illustrations'
@@ -10,6 +12,8 @@ const initialConfig = {
 }
 //{ searchParams: { code } }: any
 export default function Settings() {
+  const params = useSearchParams()
+  const offerId = params.get('offer')
   const [configChecking, setConfigChecking] = useState<InitialPermissions>(initialConfig)
   const [isMicrophoneLoading, setIsMicrophoneLoading] = useState<boolean>(true)
   const [isAssistantLoading, setIsAssistantLoading] = useState<boolean>(false)
@@ -106,9 +110,12 @@ export default function Settings() {
               </div>
             )}
           {configChecking.isAssistantEnabled && configChecking.isMicrophoneEnabled && (
-            <button className='text-green-400 hover:text-green-200 text-base bg-green-700/[0.5] hover:bg-green-700 py-2 px-6 rounded-md flex items-center'>
+            <Link
+              href={`/interview/${offerId}`}
+              className='text-green-400 hover:text-green-200 text-base bg-green-700/[0.5] hover:bg-green-700 py-2 px-4 rounded-md'
+            >
               Empezar
-            </button>
+            </Link>
           )}
         </div>
         <div className='full'>
