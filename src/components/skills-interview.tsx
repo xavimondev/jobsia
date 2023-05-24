@@ -68,23 +68,11 @@ export function SkillsInterview({ candidate, position, company, location }: Skil
   }
 
   return (
-    <div className='flex flex-row gap-4 mt-8'>
-      <div className='text-yellow-300 text-xl xl:text-3xl w-1/2'>
+    <div className='flex flex-row gap-4 mt-8 h-[calc(100vh-220px)]'>
+      <div className='text-yellow-300 text-xl xl:text-3xl w-1/2 grid place-items-center'>
         <p className='italic text-center'>{currentQuestion}</p>
       </div>
       <Speech />
-      <div>
-        <textarea
-          value={userAnswer}
-          onChange={(e) => setUserAnswer(e.target.value)}
-          name='input'
-          cols={20}
-          rows={10}
-        ></textarea>
-        <button className='p-2 bg-teal-600 text-white' onClick={startChatting}>
-          Enviar texto
-        </button>
-      </div>
     </div>
   )
 }
