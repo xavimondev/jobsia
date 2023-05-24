@@ -84,7 +84,7 @@ export function SkillsInterview({ candidate, position, company, location }: Skil
 
   return (
     <div className='flex flex-row gap-4 mt-8 h-[calc(100vh-220px)]'>
-      <div className='text-yellow-300 text-xl xl:text-3xl w-1/2 grid place-items-center'>
+      <div className='text-yellow-300 text-xl xl:text-3xl w-1/2 grid place-items-center animate-fadeIn animate-duration-700 animate-delay-300'>
         <p className='italic text-center'>{!currentQuestion ? initialMessage : currentQuestion}</p>
       </div>
       <Speech sendAnswer={sendAnswer} />
