@@ -43,20 +43,17 @@ export default async function Interview({ params: { id } }: { params: { id: stri
   return (
     <div className='h-screen relative'>
       <div className='p-6 w-full'>
-        <header className='border-b border-white border-opacity-10 flex justify-between items-center pb-4 mb-2'>
+        <header className='border-b border-white border-opacity-10 flex justify-between items-center pb-6 mb-2'>
           <div className='flex flex-col gap-2'>
             <div className='flex gap-4 items-center'>
-              <h1 className='font-bold text-xl xl:text-2xl text-white'>
-                Entrevista de trabajo para {title}
+              <h1 className='font-semibold text-lg xl:text-2xl text-white'>
+                Entrevista de trabajo para {title} de la empresa {companyName}
               </h1>
               <span className='bg-blue-300 text-blue-600 p-1.5 rounded-md font-bold text-sm hidden xl:flex items-center gap-1'>
                 <div className='h-1.5 w-1.5 rounded-full bg-blue-600'></div> {categoryValue} -{' '}
                 {subcategoryValue}
               </span>
             </div>
-            <h2 className='font-semibold text-gray-400 text-lg xl:text-xl'>
-              de la empresa {companyName}
-            </h2>
           </div>
           <div className='text-white flex items-center gap-2'>
             <h3
