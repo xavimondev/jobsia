@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 
 const SUGGESTIONS = [
   'Desarrollador c# con ASP.NET con 2 años de experiencia y modalidad presencial',
@@ -8,36 +8,33 @@ const SUGGESTIONS = [
 ]
 
 export function ListSuggestions() {
-  const router = useRouter()
   return (
     <div className='mx-auto max-w-6xl mt-4'>
       <div className='flex gap-4 flex-wrap'>
         {SUGGESTIONS.map((suggestion) => (
           <Suggestion
             key={suggestion}
-            onClick={() => {
-              router.push(`/jobs?q=${encodeURIComponent(suggestion)}`)
-            }}
-          >
-            {suggestion}
-          </Suggestion>
+            to={`/jobs?q=${encodeURIComponent(suggestion)}`}
+            text={suggestion}
+          />
         ))}
       </div>
     </div>
   )
 }
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  children: React.ReactNode
+interface LinkProps {
+  to: string
+  text: string
 }
 
-function Suggestion({ children, ...rest }: ButtonProps) {
+function Suggestion({ to, text }: LinkProps) {
   return (
-    <button
+    <Link
+      href={to}
       className='border border-white border-opacity-10 text-sm sm:text-base w-full sm:w-auto hover:border-opacity-30 shadow-md rounded-lg transition duration-200 ease-in-out group hover:-translate-y-1 z-10 bg-[#13111a] text-[#bac8de] hover:text-white p-2'
-      {...rest}
     >
-      {children}
-    </button>
+      {text}
+    </Link>
   )
 }
