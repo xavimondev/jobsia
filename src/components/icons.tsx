@@ -118,3 +118,19 @@ export function ErrorCircleIc(props: SVGProps<SVGSVGElement>) {
     </svg>
   )
 }
+
+export function MicrophoneIc(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 256 256' {...props}>
+      <path d='M80,128V64a48,48,0,0,1,96,0v64a48,48,0,0,1-96,0Zm128,0a8,8,0,0,0-16,0,64,64,0,0,1-128,0,8,8,0,0,0-16,0,80.11,80.11,0,0,0,72,79.6V232a8,8,0,0,0,16,0V207.6A80.11,80.11,0,0,0,208,128Z'></path>
+    </svg>
+  )
+}
+
+export function StopVoiceIc(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg xmlns='http://www.w3.org/2000/svg' fill='currentColor' viewBox='0 0 256 256' {...props}>
+      <path d='M216,55.27V200.73A15.29,15.29,0,0,1,200.73,216H55.27A15.29,15.29,0,0,1,40,200.73V55.27A15.29,15.29,0,0,1,55.27,40H200.73A15.29,15.29,0,0,1,216,55.27Z'></path>
+    </svg>
+  )
+}
