@@ -1,11 +1,7 @@
 import Link from 'next/link'
 import { DayMomentNight } from '@/components/illustrations'
 
-export default function Onboarding({
-  searchParams: { offer }
-}: {
-  searchParams: { offer: string }
-}) {
+export default function Onboarding() {
   return (
     <div className='p-6 h-screen grid place-items-center'>
       <section className='block lg:hidden mr-6'>
@@ -57,7 +53,7 @@ export default function Onboarding({
                 Para empezar la prueba técnica necesitas autenticarte
               </span>
               <Link
-                href={`https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV,CANDIDATE_READ_CURRICULUM_CVTEXT,CANDIDATE_READ_CURRICULUM_EDUCATION,CANDIDATE_READ_CURRICULUM_EXPERIENCE,COVER_LETTER_READ&client_id=${process.env.INFOJOBS_CLIENT_ID}&redirect_uri=${process.env.INFOJOBS_REDIRECT_URI}${offer}&response_type=code`}
+                href={`https://www.infojobs.net/api/oauth/user-authorize/index.xhtml?scope=MY_APPLICATIONS,CANDIDATE_PROFILE_WITH_EMAIL,CANDIDATE_READ_CURRICULUM_SKILLS,CV,CANDIDATE_READ_CURRICULUM_CVTEXT,CANDIDATE_READ_CURRICULUM_EDUCATION,CANDIDATE_READ_CURRICULUM_EXPERIENCE,COVER_LETTER_READ&client_id=${process.env.INFOJOBS_CLIENT_ID}&redirect_uri=${process.env.INFOJOBS_REDIRECT_URI}&response_type=code`}
                 className='rounded-md text-sm px-3 py-2 text-center bg-blue-500 text-white hover:bg-blue-600'
               >
                 Iniciar Sesión
