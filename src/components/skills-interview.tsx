@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Interview } from '@/types'
 import { useStore } from '@/store'
 import { startInterview } from '@/services/interview'
@@ -15,24 +15,39 @@ type SkillsInterviewProps = {
 }
 
 export function SkillsInterview({ candidate, position, company, location }: SkillsInterviewProps) {
-  // const initialMessage = `¡Bienvenido, ${candidate}! En ${company} estamos buscando un ${position} para nuestro equipo. La oferta es para la ciudad de ${location}.
-  // A lo largo de la entrevista, exploraremos diferentes aspectos para evaluar tu idoneidad para el puesto.`
-  const [currentQuestion, setCurrentQuestion] = useState<string>(
-    '¿Qué nos podrías contar sobre ti?'
-  )
-  const [userAnswer, setUserAnswer] = useState('')
+  const initialMessage = `¡Bienvenido, ${candidate}! La siguiente entrevista será para el puesto ${position}.
+  Durante la entrevista, exploraremos diferentes aspectos para evaluar tu idoneidad en el puesto. !Mucha suerte!`
+  // '¿Qué nos podrías contar sobre ti?'
+  const [currentQuestion, setCurrentQuestion] = useState<string | undefined>(undefined)
   const updateInterview = useStore((state) => state.updateInterview)
   const interview = useStore((state) => state.interview)
+  const speechRef = useRef<SpeechSynthesisUtterance | undefined>(undefined)
 
   useEffect(() => {
     // https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance
-    // const utterance = new SpeechSynthesisUtterance(initialMessage)
-    // utterance.lang = 'es-US'
-    // utterance.rate = 0.8
-    // speechSynthesis.speak(utterance)
+    if (!speechRef.current) {
+      const utterance = new SpeechSynthesisUtterance()
+      utterance.lang = 'es-US'
+      utterance.rate = 0.8
+      speechRef.current = utterance
+    }
   }, [])
 
-  async function startChatting() {
+  useEffect(() => {
+    if (speechRef.current) {
+      speechRef.current.text = !currentQuestion ? initialMessage : currentQuestion
+      speechSynthesis.speak(speechRef.current)
+      speechRef.current.onend = () => {
+        if (!currentQuestion) {
+          setCurrentQuestion('¿Qué nos podrías contar sobre ti?')
+        }
+      }
+    }
+  }, [speechRef.current, currentQuestion])
+
+  const sendAnswer = async (userAnswer: string) => {
+    if (!userAnswer) return
+
     const questions = interview.map((intw) => intw.question)
     const payload = {
       candidate,
@@ -57,7 +72,7 @@ export function SkillsInterview({ candidate, position, company, location }: Skil
     const { feedback, score, next_question } = data
     // Update interview conversation
     const messageInterview: Interview = {
-      question: currentQuestion,
+      question: currentQuestion!,
       answer: userAnswer,
       score,
       feedback
@@ -70,9 +85,9 @@ export function SkillsInterview({ candidate, position, company, location }: Skil
   return (
     <div className='flex flex-row gap-4 mt-8 h-[calc(100vh-220px)]'>
       <div className='text-yellow-300 text-xl xl:text-3xl w-1/2 grid place-items-center'>
-        <p className='italic text-center'>{currentQuestion}</p>
+        <p className='italic text-center'>{!currentQuestion ? initialMessage : currentQuestion}</p>
       </div>
-      <Speech />
+      <Speech sendAnswer={sendAnswer} />
     </div>
   )
 }

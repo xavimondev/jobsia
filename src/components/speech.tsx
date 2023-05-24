@@ -4,15 +4,21 @@ import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognitio
 import { MicrophoneIc, StopVoiceIc } from './icons'
 import { Tooltip } from './ui/tooltip'
 
-export function Speech() {
+type SpeechProps = {
+  sendAnswer: (userAnswer: string) => void
+}
+
+export function Speech({ sendAnswer }: SpeechProps) {
   const commands = [
     {
       command: 'reset',
       callback: ({ resetTranscript }: any) => resetTranscript()
     }
   ]
-  const { transcript, listening } = useSpeechRecognition({ commands })
+  const { transcript, listening, resetTranscript } = useSpeechRecognition({ commands })
+
   const handleListing = () => {
+    resetTranscript()
     // Lenguages: https://www.techonthenet.com/js/language_tags.php
     SpeechRecognition.startListening({
       continuous: true,
@@ -22,6 +28,8 @@ export function Speech() {
 
   const stopHandle = () => {
     SpeechRecognition.stopListening()
+    // Sending answer to api once user stops listening
+    sendAnswer(transcript)
   }
   /* {!browserSupportsSpeechRecognition && (
     // TODO: Validate this in settings page
