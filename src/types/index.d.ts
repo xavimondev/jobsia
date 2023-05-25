@@ -45,6 +45,7 @@ export interface Candidate {
   name: string
   surname1: string
   surname2: string
+  fullName?: string
   city: string
   photo: string
 }
