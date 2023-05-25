@@ -48,3 +48,8 @@ export interface Candidate {
   city: string
   photo: string
 }
+
+export interface EndInterviewStatus {
+  isInterviewSaved?: boolean
+  isLastSpeech?: boolean
+}
