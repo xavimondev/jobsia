@@ -22,5 +22,7 @@ export const useStore = create<State & Action>((set, get) => ({
     return interview.reduce((acc, curr) => acc + curr.score, 0)
   },
   setEndInterviewStatus: (endInterviewStatus: EndInterviewStatus) =>
-    set((prevState) => ({ ...prevState, ...endInterviewStatus }))
+    set((prevState) => ({
+      endInterviewStatus: { ...prevState.endInterviewStatus, ...endInterviewStatus }
+    }))
 }))
