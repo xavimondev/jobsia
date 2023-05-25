@@ -1,8 +1,6 @@
 import { cookies } from 'next/headers'
 import { Candidate } from '@/types'
-import { SkillsInterview } from '@/components/skills-interview'
-import { StatsInterview } from '@/components/stats-interview'
-import { HeaderInterview } from '@/components/header-interview'
+import { ProcessInterview } from '@/components/process-interview'
 
 async function getJobOfferDetails(offerId: string) {
   const response = await fetch(`https://api.infojobs.net/api/7/offer/${offerId}`, {
@@ -50,23 +48,10 @@ export default async function Interview({ params: { id } }: { params: { id: stri
     name,
     surname1,
     surname2,
+    fullName,
     city: cityCandidate,
     photo
   }
 
-  return (
-    <div className='h-screen relative'>
-      <div className='p-6 w-full'>
-        <HeaderInterview
-          position={title}
-          company={companyName}
-          fullName={fullName}
-          photoUrl={photo}
-          altImage={name}
-        />
-        <SkillsInterview candidate={candidate} position={title} company={companyName} />
-      </div>
-      <StatsInterview />
-    </div>
-  )
+  return <ProcessInterview position={title} company={companyName} candidate={candidate} />
 }
