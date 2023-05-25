@@ -1,6 +1,5 @@
 'use client'
 import Image from 'next/image'
-import { useStore } from '@/store'
 
 type HeaderInterviewProps = {
   position: string
@@ -17,16 +16,8 @@ export function HeaderInterview({
   photoUrl,
   altImage
 }: HeaderInterviewProps) {
-  const endInterviewStatus = useStore((state) => state.endInterviewStatus)
-
   return (
-    <header
-      className={`border-b border-white border-opacity-10 flex justify-between items-center pb-6 mb-2 ${
-        endInterviewStatus.isInterviewSaved && endInterviewStatus.isLastSpeech
-          ? 'animate-fadeOut'
-          : ''
-      } `}
-    >
+    <header className='border-b border-white border-opacity-10 flex justify-between items-center pb-6 mb-2'>
       <div className='flex flex-col gap-2'>
         <div className='flex gap-1 xl:gap-4 items-center max-w-4xl xl:max-w-6xl'>
           <h1 className='font-semibold text-lg xl:text-2xl text-white'>
