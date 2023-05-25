@@ -1,47 +1,39 @@
 'use client'
-import React, { HTMLProps } from 'react'
+import React, { HTMLProps, PropsWithChildren } from 'react'
 import * as Accordion from '@radix-ui/react-accordion'
 import { AccordionContentProps, AccordionTriggerProps } from '@radix-ui/react-accordion'
 import { ChevronDownIc } from '../icons'
 
-const AccordionUi = () => (
+const AccordionUi = ({ children }: PropsWithChildren) => (
   <Accordion.Root
     className='bg-white rounded-md shadow-[0_2px_10px] shadow-black/5 w-full'
     type='single'
     defaultValue='item-1'
     collapsible
   >
-    <AccordionItem value='item-1'>
-      <AccordionTrigger>
-        <div className='flex items-center w-full justify-between mr-2 font-semibold'>
-          <span>Is it accessible?</span>
-          <div className='rounded-full bg-green-500 h-5 w-5 text-white text-sm'>5</div>
-        </div>
-      </AccordionTrigger>
-      <AccordionContent>Yes. It adheres to the WAI-ARIA design pattern.</AccordionContent>
-    </AccordionItem>
+    {children}
   </Accordion.Root>
 )
 
 interface AccordionItemProps extends HTMLProps<HTMLDivElement> {
   value: string
 }
-const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(function AccordionItem(
-  { children, ...props },
-  forwardedRef
-) {
-  return (
-    <Accordion.Item
-      className='bg-yellow-200 focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_0_2px]'
-      {...props}
-      ref={forwardedRef}
-    >
-      {children}
-    </Accordion.Item>
-  )
-})
 
-const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(
+export const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps>(
+  function AccordionItem({ children, ...props }, forwardedRef) {
+    return (
+      <Accordion.Item
+        className='bg-yellow-200 focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_0_2px]'
+        {...props}
+        ref={forwardedRef}
+      >
+        {children}
+      </Accordion.Item>
+    )
+  }
+)
+
+export const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerProps>(
   function AccordionTrigger({ children, ...props }, forwardedRef) {
     return (
       <Accordion.Header className='flex'>
@@ -58,11 +50,11 @@ const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTriggerPro
   }
 )
 
-const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
+export const AccordionContent = React.forwardRef<HTMLDivElement, AccordionContentProps>(
   function AccordionContent({ children, ...props }, forwardedRef) {
     return (
       <Accordion.Content
-        className='text-gray-600 bg-yellow-50 data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden text-sm'
+        className='text-gray-600 bg-yellow-50 data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden text-base'
         {...props}
         ref={forwardedRef}
       >
