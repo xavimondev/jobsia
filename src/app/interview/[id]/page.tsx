@@ -1,7 +1,8 @@
 import { cookies } from 'next/headers'
-import Image from 'next/image'
+import { Candidate } from '@/types'
 import { SkillsInterview } from '@/components/skills-interview'
 import { StatsInterview } from '@/components/stats-interview'
+import { HeaderInterview } from '@/components/header-interview'
 
 async function getJobOfferDetails(offerId: string) {
   const response = await fetch(`https://api.infojobs.net/api/7/offer/${offerId}`, {
@@ -32,52 +33,38 @@ export default async function Interview({ params: { id } }: { params: { id: stri
   const [jobDetails, candidateDetails] = await Promise.all([jobOfferData, candidateData])
   const {
     title,
-    city,
-    category: { value: categoryValue },
-    subcategory: { value: subcategoryValue },
     profile: { name: companyName }
   } = jobDetails
-  // console.log(jobDetails)
-  const { id: jobOfferId, photo, name, fullName } = candidateDetails
+
+  const {
+    id: candidateId,
+    photo,
+    name,
+    fullName,
+    surname1,
+    surname2,
+    city: cityCandidate
+  } = candidateDetails
+  const candidate: Candidate = {
+    id: candidateId,
+    name,
+    surname1,
+    surname2,
+    city: cityCandidate,
+    photo
+  }
 
   return (
     <div className='h-screen relative'>
       <div className='p-6 w-full'>
-        <header className='border-b border-white border-opacity-10 flex justify-between items-center pb-6 mb-2'>
-          <div className='flex flex-col gap-2'>
-            <div className='flex gap-4 items-center'>
-              <h1 className='font-semibold text-lg xl:text-2xl text-white'>
-                Entrevista de trabajo para {title} de la empresa {companyName}
-              </h1>
-              <span className='bg-blue-300 text-blue-600 p-1.5 rounded-md font-bold text-sm hidden xl:flex items-center gap-1'>
-                <div className='h-1.5 w-1.5 rounded-full bg-blue-600'></div> {categoryValue} -{' '}
-                {subcategoryValue}
-              </span>
-            </div>
-          </div>
-          <div className='text-white flex items-center gap-2'>
-            <h3
-              className='text-base xl:text-lg font-bold'
-              dangerouslySetInnerHTML={{
-                __html: fullName
-              }}
-            />
-            <Image
-              src={photo}
-              width={32}
-              height={32}
-              alt={`Foto de ${name}`}
-              className='rounded-full w-6 h-6 xl:w-8 xl:h-8'
-            />
-          </div>
-        </header>
-        <SkillsInterview
-          candidate={name}
+        <HeaderInterview
           position={title}
           company={companyName}
-          category={categoryValue}
-          location={city}
+          fullName={fullName}
+          photoUrl={photo}
+          altImage={name}
         />
+        <SkillsInterview candidate={candidate} position={title} company={companyName} />
       </div>
       <StatsInterview />
     </div>
