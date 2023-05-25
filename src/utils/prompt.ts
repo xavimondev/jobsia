@@ -1,9 +1,3 @@
-export const sayGoodByePrompt = (candidateName: string, company: string, position: string) => {
-  return `Tu eres un asistente IA que ha finalizado el proceso de entrevista para el puesto ${position} en ${company}.
-  El candidato fue ${candidateName}. 
-  Despídete de manera amable. El mensaje no debe exceder los 400 caracteres.`
-}
-
 const questionsToAvoid = (questions: string[]) => {
   return questions.length > 0
     ? `
@@ -20,7 +14,6 @@ export const initialInterviewPrompt = (
   lastAnswer: string,
   questions: string[]
 ) => {
-  console.log(questionsToAvoid(questions))
   return `
   Tu eres un asistente IA que está en un proceso de entrevista para el puesto ${position} en ${company}.El candidato es ${candidateName}.
 
