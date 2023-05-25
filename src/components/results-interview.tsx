@@ -17,7 +17,7 @@ export function ResultsInterview() {
           <Discarded className='w-[400px] h-[400px] xl:w-[600px] xl:h-[600px]' />
         )}
 
-        <div className='flex flex-col items-center gap-4'>
+        <div className='flex flex-col gap-4'>
           <ScoreInterview />
           <FeedbackInterview />
         </div>
