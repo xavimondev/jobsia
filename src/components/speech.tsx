@@ -1,6 +1,7 @@
 'use client'
 import 'regenerator-runtime/runtime'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
+import { useStore } from '@/store'
 import { MicrophoneIc, StopVoiceIc } from './icons'
 import { Tooltip } from './ui/tooltip'
 
@@ -9,6 +10,7 @@ type SpeechProps = {
 }
 
 export function Speech({ sendAnswer }: SpeechProps) {
+  const endInterviewStatus = useStore((state) => state.endInterviewStatus)
   const commands = [
     {
       command: 'reset',
@@ -37,7 +39,13 @@ export function Speech({ sendAnswer }: SpeechProps) {
   )} */
   return (
     <>
-      <div className='w-1/2 relative grid place-items-center'>
+      <div
+        className={`w-1/2 relative grid place-items-center ${
+          endInterviewStatus.isInterviewSaved && endInterviewStatus.isLastSpeech
+            ? 'animate-fadeOutRight'
+            : ''
+        }`}
+      >
         <p className='text-white text-xl xl:text-2xl'>{transcript}</p>
         <div className='absolute bottom-5 left-1/2 transition duration-200 ease-in-out hover:scale-125'>
           <Tooltip text={`${!listening ? 'Click para hablar' : 'Click para enviar tu respuesta'}`}>
