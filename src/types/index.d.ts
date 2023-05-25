@@ -39,3 +39,12 @@ export interface Interview {
   score: number
   feedback: string
 }
+
+export interface Candidate {
+  id: string
+  name: string
+  surname1: string
+  surname2: string
+  city: string
+  photo: string
+}
