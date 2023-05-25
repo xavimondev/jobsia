@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import { Configuration, OpenAIApi } from 'openai'
-import { INTERVIEW_TOTAL_QUESTIONS } from '@/utils/constants'
-import { initialInterviewPrompt, sayGoodByePrompt } from '@/utils/prompt'
+import { initialInterviewPrompt } from '@/utils/prompt'
 
 const openIAKey = process.env.OPEN_IA_KEY as string
 
@@ -15,10 +14,14 @@ export async function POST(request: Request) {
   const { candidate, position, company, currentQuestion, userAnswer, questions } = body
   // if it gets to the end of the interview, just say bye
   // otherwise, continue with the interview
-  const content =
-    questions.length + 1 === INTERVIEW_TOTAL_QUESTIONS // +1 because it's not counting the first question
-      ? sayGoodByePrompt(candidate, company, position)
-      : initialInterviewPrompt(candidate, company, position, currentQuestion, userAnswer, questions)
+  const content = initialInterviewPrompt(
+    candidate,
+    company,
+    position,
+    currentQuestion,
+    userAnswer,
+    questions
+  )
 
   const response = await openai.createChatCompletion({
     model: 'gpt-3.5-turbo',
