@@ -35,9 +35,6 @@ export async function POST(request: Request) {
   })
   const data = response.data.choices[0].message?.content ?? ''
   try {
-    // TODO: Change this to a better solution
-    if (!data.includes('{')) return NextResponse.json({ message: data, isEndInterview: true })
-
     const json = JSON.parse(data)
     return NextResponse.json(json)
   } catch {
