@@ -9,7 +9,7 @@ export function ScoreInterview() {
   }`
 
   return (
-    <div className='text-3xl xl:text-5xl'>
+    <div className='text-2xl xl:text-4xl'>
       <p className='text-white font-semibold'>
         <span className={gradientStyles}>{hasIdealScore ? 'Felicidades' : 'Lo siento'}</span>, has
         obtenido <span className={gradientStyles}>{getTotalScore()}</span> puntos de{' '}
