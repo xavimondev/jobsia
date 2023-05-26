@@ -7,8 +7,6 @@ import { useStore } from '@/store'
 import { saveInterview, startInterview } from '@/services/interview'
 import { Speech } from './speech'
 
-// Testing: 307777a5f54cd09d3b6440ddf7d98a
-
 type SkillsInterviewProps = {
   candidate: Candidate
   position: string
@@ -25,6 +23,7 @@ export function SkillsInterview({ candidate, position, company }: SkillsIntervie
   const interview = useStore((state) => state.interview)
   const endInterviewStatus = useStore((state) => state.endInterviewStatus)
   const setEndInterviewStatus = useStore((state) => state.setEndInterviewStatus)
+  const setIsAssistantSpeaking = useStore((state) => state.setIsAssistantSpeaking)
   const speechRef = useRef<SpeechSynthesisUtterance | undefined>(undefined)
 
   useEffect(() => {
@@ -45,6 +44,7 @@ export function SkillsInterview({ candidate, position, company }: SkillsIntervie
         if (!currentQuestion) {
           setCurrentQuestion('¿Qué nos podrías contar sobre ti?')
         }
+        setIsAssistantSpeaking(false)
       }
     }
   }, [currentQuestion])
