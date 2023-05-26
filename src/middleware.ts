@@ -5,11 +5,8 @@ export async function middleware(request: NextRequest) {
   const url = new URL(request.url)
   const response = NextResponse.next()
 
-  // TODO: Change this logic for something better
-  // Checking if there is a offerId in url or not.This offerId will be necessary during interview
   const offerId = url.searchParams.get('offerId') as string
-  console.log(`This is offerId: ${offerId}`)
-
+  // Checking if there is a offerId in url or not.This offerId will be necessary during interview
   const access_token = request.cookies.has('jobsia.access-token')
   // This means I already have access_token and I just need to continue
   if (access_token) {
@@ -40,7 +37,6 @@ export async function middleware(request: NextRequest) {
         expires: new Date(Date.now() + expires_in * 1000),
         httpOnly: true
       })
-      // 63797022-141f-41e7-b206-9d7aab5b76b5
       response.cookies.set('jobsia.refresh-token', refresh_token, {
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
         httpOnly: true
@@ -59,7 +55,6 @@ export async function middleware(request: NextRequest) {
   const code = url.searchParams.get('code') as string
   if (!code) {
     // Redirect to onboarding page to let user get access_token
-    //, {status: 401}
     const response = NextResponse.redirect(new URL('/onboarding', request.url))
     if (offerId) {
       response.cookies.set('jobsia.offer-id', offerId, {
