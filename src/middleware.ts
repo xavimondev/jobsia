@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { INFOJOBS_AUTH } from '@/utils/constants'
+import { generateToken } from './services/auth'
 
 export async function middleware(request: NextRequest) {
   const url = new URL(request.url)
@@ -21,35 +21,31 @@ export async function middleware(request: NextRequest) {
     return response
   }
 
+  const clientId = process.env.INFOJOBS_CLIENT_ID as string
+  const clientSecret = process.env.INFOJOBS_CLIENT_SECRET as string
+  const infojobsUri = process.env.INFOJOBS_REDIRECT_URI as string
   // Checking if there is a refresh_token in cookies
-  const refresh_token = request.cookies.has('jobsia.refresh-token')
-  if (refresh_token) {
-    // This means access_token is expired, so I need to generate new one
-    const params = new URLSearchParams()
-    params.append('grant_type', 'refresh_token')
-    params.append('client_id', process.env.INFOJOBS_CLIENT_ID as string)
-    params.append('client_secret', process.env.INFOJOBS_CLIENT_SECRET as string)
-    params.append('refresh_token', request.cookies.get('jobsia.refresh-token')?.value as string)
-    params.append('redirect_uri', process.env.INFOJOBS_REDIRECT_URI as string)
+  const refreshTokenExists = request.cookies.has('jobsia.refresh-token')
+  console.log(`Hay un refresh_token: ${refreshTokenExists}`)
+  if (refreshTokenExists) {
+    const refresTokenValue = request.cookies.get('jobsia.refresh-token')?.value as string
+    console.log(`Printing refresh_token: ${refresTokenValue}`)
+    const tokens = await generateToken(clientId, clientSecret, true, refresTokenValue, infojobsUri)
+    console.log(`Printing tokens: ${JSON.stringify(tokens)}`)
 
-    const data = await fetch(INFOJOBS_AUTH, {
-      method: 'POST',
-      body: params,
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
-    })
-    const tokens = await data.json()
-    // Saving new tokens in cookies
-    response.cookies.set('jobsia.access-token', tokens.access_token, {
-      expires: new Date(Date.now() + tokens.expires_in * 1000),
-      httpOnly: true
-    })
-
-    response.cookies.set('jobsia.refresh-token', tokens.refresh_token, {
-      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
-      httpOnly: true
-    })
+    if (tokens) {
+      const { access_token, refresh_token, expires_in } = tokens
+      // Saving new tokens in cookies
+      response.cookies.set('jobsia.access-token', access_token, {
+        expires: new Date(Date.now() + expires_in * 1000),
+        httpOnly: true
+      })
+      // 63797022-141f-41e7-b206-9d7aab5b76b5
+      response.cookies.set('jobsia.refresh-token', refresh_token, {
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
+        httpOnly: true
+      })
+    }
 
     if (offerId) {
       response.cookies.set('jobsia.offer-id', offerId, {
@@ -74,38 +70,25 @@ export async function middleware(request: NextRequest) {
   }
 
   // Generating new access token
-  const params = new URLSearchParams()
-  params.append('grant_type', 'authorization_code')
-  params.append('client_id', process.env.INFOJOBS_CLIENT_ID as string)
-  params.append('client_secret', process.env.INFOJOBS_CLIENT_SECRET as string)
-  params.append('code', code)
-  params.append('redirect_uri', process.env.INFOJOBS_REDIRECT_URI as string)
+  const tokens = await generateToken(clientId, clientSecret, false, code, infojobsUri)
+  if (tokens) {
+    // Saving tokens in cookies
+    // TODO: Change this for something more reliable
+    response.cookies.set('jobsia.access-token', tokens.access_token, {
+      expires: new Date(Date.now() + tokens.expires_in * 1000),
+      httpOnly: true
+    })
 
-  const data = await fetch(INFOJOBS_AUTH, {
-    method: 'POST',
-    body: params,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  })
-  const tokens = await data.json()
+    response.cookies.set('jobsia.refresh-token', tokens.refresh_token, {
+      expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
+      httpOnly: true
+    })
+  }
 
-  //const response = NextResponse.next()
-  // Saving tokens in cookies
-  // TODO: Change this for something more reliable
-  response.cookies.set('jobsia.access-token', tokens.access_token, {
-    expires: new Date(Date.now() + tokens.expires_in * 1000),
-    httpOnly: true
-  })
-
-  response.cookies.set('jobsia.refresh-token', tokens.refresh_token, {
-    expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days
-    httpOnly: true
-  })
   return response
 }
 
 // See "Matching Paths" below to learn more
 export const config = {
-  matcher: ['/settings', '/interview/:path']
+  matcher: ['/settings', '/interview/:path*']
 }
