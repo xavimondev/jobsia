@@ -83,7 +83,7 @@ export default function JobsResults() {
       {isLoading.jobs && <RingLoader msg='Obteniendo ofertas de trabajo' />}
       {!isLoading.jobs && jobResults.length === 0 && <NotResultsFound />}
       {!isLoading.jobs && jobResults.length > 0 && (
-        <section className='flex gap-5 w-full'>
+        <section className='flex gap-5 w-full h-[calc(100vh-120px)]'>
           <ListOffers jobDetailsFn={getJobDetails} offers={jobResults} />
           {isLoading.jobdetails && <RingLoader msg='Obteniendo detalles de la oferta' />}
           {!jobDetails && !isLoading.jobdetails && <NotJobSelected />}
