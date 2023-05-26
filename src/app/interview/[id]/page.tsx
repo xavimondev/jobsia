@@ -1,6 +1,8 @@
 import { cookies } from 'next/headers'
+import { createClient } from '@supabase/supabase-js'
 import { Candidate } from '@/types'
 import { ProcessInterview } from '@/components/process-interview'
+import { CheckInterview } from '@/components/check-interview'
 
 async function getJobOfferDetails(offerId: string) {
   const response = await fetch(`https://api.infojobs.net/api/7/offer/${offerId}`, {
@@ -22,6 +24,20 @@ async function getCandidateData() {
     }
   })
   return response.json()
+}
+
+async function verifyInterview(candidateId: string, offerId: string) {
+  const supabaseUrl = process.env.SUPABASE_URL as string
+  const supabaseKey = process.env.SUPABASE_KEY as string
+  const supabase = createClient(supabaseUrl, supabaseKey)
+
+  const { data } = await supabase
+    .from('interviews')
+    .select('created_at')
+    .eq('offerId', offerId)
+    .eq('candidateId', candidateId)
+
+  return data
 }
 
 export default async function Interview({ params: { id } }: { params: { id: string } }) {
@@ -52,6 +68,15 @@ export default async function Interview({ params: { id } }: { params: { id: stri
     city: cityCandidate,
     photo
   }
+  const interviewData = await verifyInterview(candidate.id, id)
+  if (interviewData!.length === 0)
+    return <ProcessInterview position={title} company={companyName} candidate={candidate} />
 
-  return <ProcessInterview position={title} company={companyName} candidate={candidate} />
+  return (
+    <CheckInterview
+      position={title}
+      company={companyName}
+      interviewDate={interviewData![0].created_at}
+    />
+  )
 }
