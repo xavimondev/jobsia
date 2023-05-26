@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react'
 import { NoSearchResults, WaitingSearch } from './illustrations'
 
 export function NotResultsFound() {
@@ -17,6 +18,14 @@ export function NotJobSelected() {
     <div className='mt-2 hidden lg:flex justify-center items-center gap-2 flex-col text-center w-full h-full'>
       <WaitingSearch className='h-[200px] w-[200px] sm:w-[400px] sm:h-[400px]' />
       <p className='text-white text-2xl'>Selecciona una oferta de trabajo para ver el detalle</p>
+    </div>
+  )
+}
+
+export function NotInterviewAllowed({ children }: PropsWithChildren) {
+  return (
+    <div className='mt-2 hidden lg:flex justify-center items-center gap-2 flex-col text-center w-full h-full'>
+      {children}
     </div>
   )
 }
