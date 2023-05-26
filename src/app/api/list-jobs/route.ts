@@ -36,7 +36,6 @@ export async function GET(request: Request) {
     })
     // throw new Error('Error while fetching data')
   }
-  console.log(data)
 
   const offers: JobOffer[] = data.map((offer: any) => {
     const {
