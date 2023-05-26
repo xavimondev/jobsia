@@ -13,7 +13,7 @@ export function JobOfferDetails({ jobOffer }: JobOfferDetailsProps) {
 
   return (
     <>
-      <div className='hidden lg:flex flex-col gap-5 rounded-xl bg-[#1d1c2d] w-full h-full p-5 animate-fadeIn'>
+      <div className='hidden lg:flex flex-col gap-5 rounded-xl bg-[#1d1c2d] w-full h-full p-5 animate-fadeIn overflow-scroll'>
         <div className='flex flex-row gap-2 items-center'>
           {jobOffer.company.logo && (
             <Image
@@ -76,7 +76,9 @@ export function JobOfferDetails({ jobOffer }: JobOfferDetailsProps) {
           <StudyIc width={18} height={18} />
         </JobOfferDetailItem>
         {/* Skills section */}
-        {jobOffer.skillsList && <JobOfferDetailSkills skillsList={jobOffer.skillsList} />}
+        {jobOffer.skillsList && jobOffer.skillsList.length > 0 && (
+          <JobOfferDetailSkills skillsList={jobOffer.skillsList} />
+        )}
         <div className='flex pt-3 justify-end'>
           <Tooltip text='Al generar una entrevista pondrás a prueba tu experiencia en los conocimientos requeridos en la oferta de trabajo seleccionada'>
             <Link
