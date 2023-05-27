@@ -1,11 +1,26 @@
 import './globals.css'
+import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { AUTH_REDIRECT } from '@/utils/constants'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata = {
-  title: 'Jobsia',
-  description: 'Aplicación para la hackaton de infojobs'
+const description = `Plataforma con búsqueda avanzada de trabajo. Tendrás la opción de generar una entrevista interactiva con un asistente de inteligencia artificial por oferta de trabajo`
+const title = 'Jobs.ia - Plataforma para encontrar trabajo gracias a la inteligencia artificial'
+
+export const metadata: Metadata = {
+  metadataBase: new URL(AUTH_REDIRECT),
+  title,
+  description,
+  openGraph: {
+    title,
+    description:
+      'Plataforma con búsqueda avanzada de trabajo y generador de entrevistas con inteligencia artificial',
+    url: 'https://jobsia.vercel.app/',
+    siteName: 'Jobs.ia',
+    locale: 'es_ES',
+    type: 'website'
+  }
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
