@@ -5,6 +5,7 @@ import { INTERVIEW_TOTAL_QUESTIONS } from '@/utils/constants'
 import { getByeMessage } from '@/utils/getByeMessage'
 import { useStore } from '@/store'
 import { saveInterview, startInterview } from '@/services/interview'
+import { LineWobbleLoader } from './loaders'
 import { Speech } from './speech'
 
 type SkillsInterviewProps = {
@@ -18,6 +19,7 @@ export function SkillsInterview({ candidate, position, company }: SkillsIntervie
   Durante la entrevista, exploraremos diferentes aspectos para evaluar tu idoneidad en el puesto. !Mucha suerte!`
 
   const [currentQuestion, setCurrentQuestion] = useState<string | undefined>(undefined)
+  const [isGeneratingNextQuestion, setIsGeneratingNextQuestion] = useState<boolean>(false)
   const [byeMessage, setByeMessage] = useState<string>('')
   const updateInterview = useStore((state) => state.updateInterview)
   const interview = useStore((state) => state.interview)
@@ -66,6 +68,8 @@ export function SkillsInterview({ candidate, position, company }: SkillsIntervie
   const sendAnswer = async (userAnswer: string) => {
     if (!userAnswer) return
 
+    setIsGeneratingNextQuestion(true)
+
     const questions = interview.map((intw) => intw.question)
     const payload = {
       candidate: candidate.name,
@@ -106,6 +110,7 @@ export function SkillsInterview({ candidate, position, company }: SkillsIntervie
         })
         // At this point, just set a bye message instead of next question
         setByeMessage(getByeMessage(position, company, candidate.name))
+        setIsGeneratingNextQuestion(false)
         return
       }
       // TODO: Show an error message
@@ -113,14 +118,22 @@ export function SkillsInterview({ candidate, position, company }: SkillsIntervie
     }
     // Update current question
     setCurrentQuestion(next_question)
+    setIsGeneratingNextQuestion(false)
   }
 
   return (
     <div className='flex flex-row gap-4 mt-8 h-[calc(100vh-220px)]'>
-      <div className='text-yellow-300 text-xl xl:text-3xl w-1/2 grid place-items-center animate-fadeIn animate-duration-700 animate-delay-300'>
-        <p className='italic text-center'>
-          {byeMessage ? byeMessage : !currentQuestion ? initialMessage : currentQuestion}
-        </p>
+      <div className='text-yellow-300 text-lg xl:text-2xl w-1/2 grid place-items-center animate-fadeIn animate-duration-700 animate-delay-300'>
+        {isGeneratingNextQuestion ? (
+          <LineWobbleLoader
+            msg='El asistente está generando otra pregunta...'
+            className='text-yellow-300 italic'
+          />
+        ) : (
+          <p className='italic text-center animate-fadeIn'>
+            {byeMessage ? byeMessage : !currentQuestion ? initialMessage : currentQuestion}
+          </p>
+        )}
       </div>
       <Speech sendAnswer={sendAnswer} />
     </div>
