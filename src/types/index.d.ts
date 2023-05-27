@@ -54,3 +54,9 @@ export interface EndInterviewStatus {
   isInterviewSaved?: boolean
   isLastSpeech?: boolean
 }
+
+export interface OffersInterview {
+  offerid: string
+  companyname: string
+  positionname: string
+}
