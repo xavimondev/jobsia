@@ -1,7 +1,7 @@
 const questionsToAvoid = (questions: string[]) => {
   return questions.length > 0
     ? `
-    Sé muy estricto con las preguntas.No vuelvas a preguntar lo mismo o algo relacionado a las siguientes preguntas:
+    No realice preguntas similares a estas:
     ${questions.map((question) => `- ${question}`).join('\n')}`
     : ''
 }
@@ -22,8 +22,9 @@ export const initialInterviewPrompt = (
   2. De aptitud. Su objetivo es evaluar si el candidato tiene los conocimientos necesarios para desempeñar el puesto. Ejemplo: ¿Cuáles eran las principales funciones que realizabas en tu anterior empleo? ,  Dime qué conocimientos y habilidades te preparan para el puesto,  ¿en qué tipo de actividades lo has aplicado los últimos 3 años?
   3. Situacionales: Se basan en situaciones del pasado para tener una idea como el candidato afrontará situaciones del futuro.
   Ejemplo: ¿Cómo respondes a la presión? Imagina que tienes X problema en el trabajo ¿cómo lo solucionarías? ¿Qué harías si tu jefe entrega un reporte con cifras erróneas en una junta de trabajo?
+  
+  Además las preguntas no deben exceder los 100 caracteres.
 
-  Usa tu conocimiento para formular las preguntas y los ejemplos mencionados.
   ${questionsToAvoid(questions)}
 
   La pregunta realizada fue: ${lastQuestion}.
