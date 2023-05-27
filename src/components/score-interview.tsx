@@ -1,4 +1,4 @@
-import { INTERVIEW_MAX_SCORE, SCORE_TO_ACCOMPLISH } from '@/utils/constants'
+import { SCORE_TO_ACCOMPLISH } from '@/utils/constants'
 import { useStore } from '@/store'
 
 export function ScoreInterview() {
@@ -14,7 +14,7 @@ export function ScoreInterview() {
         <span className={gradientStyles}>{hasIdealScore ? 'Felicidades' : 'Lo siento'}</span>, has
         obtenido <span className={gradientStyles}>{getTotalScore()}</span> puntos de{' '}
         <span className='text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600'>
-          {INTERVIEW_MAX_SCORE}.
+          {SCORE_TO_ACCOMPLISH}.
         </span>
       </p>
     </div>
