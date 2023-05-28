@@ -1,15 +1,18 @@
 'use client'
 import { SelectBox, SelectBoxItem } from '@tremor/react'
 import { OffersInterview } from '@/types'
+import { useStore } from '@/store'
 
 type ListOffersInterviewProps = {
   offers: OffersInterview[]
 }
 
 export function ListOffersInterview({ offers }: ListOffersInterviewProps) {
+  const setJobOfferIdSelected = useStore((state) => state.setJobOfferIdSelected)
+
   return (
     <SelectBox
-      onValueChange={(value) => console.log('the new value is', value)}
+      onValueChange={(value) => setJobOfferIdSelected(value)}
       placeholder='Selecciona el puesto de tu interés'
       className='w-96'
     >
