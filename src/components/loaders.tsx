@@ -3,11 +3,12 @@ import { LoadingIc } from './icons'
 
 type RingLoaderProps = {
   msg: string
+  className?: string
 }
 
-export function RingLoader({ msg }: RingLoaderProps) {
+export function RingLoader({ msg, className }: RingLoaderProps) {
   return (
-    <div className='flex flex-col gap-2 justify-center items-center mt-20 w-full'>
+    <div className={`flex flex-col gap-2 justify-center items-center w-full ${className ?? ''}`}>
       <LoadingIc className='h-10 w-10' />
       <span className='font-bold text-white'>{msg}</span>
     </div>
