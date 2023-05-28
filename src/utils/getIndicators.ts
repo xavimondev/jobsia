@@ -1,11 +1,11 @@
-import { ReportInterview } from '@/types'
+import { Indicators, ReportInterview } from '@/types'
 import { SCORE_TO_ACCOMPLISH } from '@/utils/constants'
 
 export const getIndicators = (report: ReportInterview[]) => {
-  const indicators: Record<string, number> = {
+  const indicators: Indicators = {
     seleccionados: 0,
     noSeleccionados: 0,
-    totalPostulante: report.length
+    postulantes: report.length
   }
 
   report.forEach((interview) => {
