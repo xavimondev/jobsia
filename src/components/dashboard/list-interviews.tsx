@@ -1,5 +1,4 @@
 'use client'
-import { useEffect, useState } from 'react'
 import {
   Card,
   Title,
@@ -10,26 +9,18 @@ import {
   TableHeaderCell,
   TableBody,
   TableCell,
-  Text
+  Text,
+  Button
 } from '@tremor/react'
+import { useStore } from '@/store'
 import { getReadableDate } from '@/utils/getReadableDate'
 import { SCORE_TO_ACCOMPLISH } from '@/utils/constants'
-import { EyeIc } from '../icons'
-import { Tooltip } from '../ui/tooltip'
+import { EyeIc } from '@/components/icons'
+import { Tooltip } from '@/components/ui/tooltip'
 
 export function ListInterviews() {
-  const [listInterview, setListInterview] = useState([])
+  const interviewReport = useStore((state) => state.interviewReport)
 
-  useEffect(() => {
-    fetch(`/api/dashboard?offerid=da9543e55b4748a4092c2d408be901`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.interviews) {
-          console.log(data.interviews)
-          setListInterview(data.interviews)
-        }
-      })
-  }, [])
   return (
     <Card className='mt-6 bg-transparent border border-gray-400 border-opacity-25 ring-0'>
       <Title className='text-white'>
@@ -48,42 +39,51 @@ export function ListInterviews() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {listInterview.map((item: any) => (
-            <TableRow key={item.interviewid} className='text-blue-500'>
+          {!interviewReport && (
+            <TableRow>
               <TableCell>
-                <Text className='text-gray-300'>{item.candidate}</Text>
+                <Text className='text-gray-300'>
+                  Selecciona el puesto de tu interés para ver resultados
+                </Text>
               </TableCell>
-              <TableCell>
-                <Text className='text-gray-300'>{item.city}</Text>
-              </TableCell>
-              <TableCell>
-                <Text className='text-gray-300'>{item.jobposition}</Text>
-              </TableCell>
-              <TableCell>
-                <Text className='text-gray-300'>{item.company}</Text>
-              </TableCell>
-              <TableCell>
-                <Text className='text-gray-300'>{getReadableDate(item.interviewdate)}</Text>
-              </TableCell>
-              <TableCell>
-                <Text>
+            </TableRow>
+          )}
+          {interviewReport &&
+            interviewReport.length > 0 &&
+            interviewReport.map((item: any) => (
+              <TableRow key={item.interviewid}>
+                <TableCell>
+                  <Text className='text-gray-300'>{item.candidate}</Text>
+                </TableCell>
+                <TableCell>
+                  <Text className='text-gray-300'>{item.city}</Text>
+                </TableCell>
+                <TableCell>
+                  <Text className='text-gray-300'>{item.jobposition}</Text>
+                </TableCell>
+                <TableCell>
+                  <Text className='text-gray-300'>{item.company}</Text>
+                </TableCell>
+                <TableCell>
+                  <Text className='text-gray-300'>{getReadableDate(item.interviewdate)}</Text>
+                </TableCell>
+                <TableCell>
                   <Badge
                     className='font-bold'
                     color={SCORE_TO_ACCOMPLISH === item.totalscore ? 'green' : 'red'}
                   >
                     {item.totalscore}
                   </Badge>
-                </Text>
-              </TableCell>
-              <TableCell>
-                <Tooltip text='Click para ver el detalle'>
-                  <button>
-                    <EyeIc className='h-5 w-5 text-white' />
-                  </button>
-                </Tooltip>
-              </TableCell>
-            </TableRow>
-          ))}
+                </TableCell>
+                <TableCell>
+                  <Tooltip text='Click para ver el detalle'>
+                    <Button className='bg-transparent border border-gray-400 border-opacity-25 hover:bg-[#1d1b25]'>
+                      <EyeIc className='h-5 w-5 text-white' />
+                    </Button>
+                  </Tooltip>
+                </TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </Card>
