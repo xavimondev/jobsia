@@ -1,5 +1,5 @@
 import { useStore } from '@/store'
-import { UsersIc } from '@/components/icons'
+import { CheckIc, NotIc, UsersIc } from '@/components/icons'
 
 export function ListIndicators() {
   const indicators = useStore((state) => state.indicators)
@@ -10,7 +10,7 @@ export function ListIndicators() {
       <div className='rounded-lg border border-gray-400 border-opacity-25 shadow-sm'>
         <div className='p-6 flex flex-row items-center justify-between space-y-0 pb-3'>
           <h3 className='text font-medium'>Postulantes</h3>
-          <UsersIc className='w-8 h-8 text-white' />
+          <UsersIc className='w-6 h-6 text-white' />
         </div>
         <div className='p-6 pt-0'>
           <div className='text-2xl font-bold'>{postulantes}</div>
@@ -19,7 +19,7 @@ export function ListIndicators() {
       <div className='rounded-lg border border-gray-400 border-opacity-25 shadow-sm'>
         <div className='p-6 flex flex-row items-center justify-between space-y-0 pb-3'>
           <h3 className='text font-medium'>Seleccionados</h3>
-          <UsersIc className='w-8 h-8 text-white' />
+          <CheckIc className='w-6 h-6 text-white' />
         </div>
         <div className='p-6 pt-0'>
           <div className='text-2xl font-bold'>{seleccionados}</div>
@@ -28,7 +28,7 @@ export function ListIndicators() {
       <div className='rounded-lg border border-gray-400 border-opacity-25 shadow-sm'>
         <div className='p-6 flex flex-row items-center justify-between space-y-0 pb-3'>
           <h3 className='text font-medium'>No Seleccionados</h3>
-          <UsersIc className='w-8 h-8 text-white' />
+          <NotIc className='w-6 h-6 text-white' />
         </div>
         <div className='p-6 pt-0'>
           <div className='text-2xl font-bold'>{noSeleccionados}</div>
