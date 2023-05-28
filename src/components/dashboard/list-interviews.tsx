@@ -50,7 +50,7 @@ export function ListInterviews() {
           )}
           {interviewReport &&
             interviewReport.length > 0 &&
-            interviewReport.map((item: any) => (
+            interviewReport.map((item) => (
               <TableRow key={item.interviewid}>
                 <TableCell>
                   <Text className='text-gray-300'>{item.candidate}</Text>
