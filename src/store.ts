@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { EndInterviewStatus, Interview, ReportInterview } from './types'
+import { EndInterviewStatus, Indicators, Interview, ReportInterview } from './types'
 
 type State = {
   interview: Interview[]
@@ -7,6 +7,7 @@ type State = {
   isAssistantSpeaking: boolean
   jobOfferIdSelected: string | undefined
   interviewReport: ReportInterview[] | undefined
+  indicators: Indicators
 }
 
 type Action = {
@@ -16,6 +17,7 @@ type Action = {
   setIsAssistantSpeaking: (isAssistantSpeaking: boolean) => void
   setJobOfferIdSelected: (jobOfferIdSelected: string) => void
   setInterviewReport: (interviewReport: ReportInterview[]) => void
+  setIndicators: (indicators: Indicators) => void
 }
 
 export const useStore = create<State & Action>((set, get) => ({
@@ -24,6 +26,7 @@ export const useStore = create<State & Action>((set, get) => ({
   isAssistantSpeaking: true,
   jobOfferIdSelected: undefined,
   interviewReport: undefined,
+  indicators: { seleccionados: 0, noSeleccionados: 0, postulantes: 0 },
   updateInterview: (interviewData: Interview) =>
     set((prev) => ({ interview: [...prev.interview, interviewData] })),
   getTotalScore: () => {
@@ -36,5 +39,6 @@ export const useStore = create<State & Action>((set, get) => ({
     })),
   setIsAssistantSpeaking: (isAssistantSpeaking: boolean) => set({ isAssistantSpeaking }),
   setJobOfferIdSelected: (jobOfferIdSelected: string) => set({ jobOfferIdSelected }),
-  setInterviewReport: (interviewReport: ReportInterview[]) => set({ interviewReport })
+  setInterviewReport: (interviewReport: ReportInterview[]) => set({ interviewReport }),
+  setIndicators: (indicators: Indicators) => set({ indicators })
 }))
