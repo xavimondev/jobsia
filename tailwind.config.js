@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 import { withAnimations } from 'animated-tailwindcss'
-import { mauve, violet } from '@radix-ui/colors'
 
 module.exports = withAnimations({
   content: [
@@ -15,10 +14,7 @@ module.exports = withAnimations({
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       },
-      colors: {
-        ...mauve,
-        ...violet,
-      },
+      colors: {},
       keyframes: {
         slideDown: {
           from: { height: 0 },

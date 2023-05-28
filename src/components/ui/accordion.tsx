@@ -23,7 +23,7 @@ export const AccordionItem = React.forwardRef<HTMLDivElement, AccordionItemProps
   function AccordionItem({ children, ...props }, forwardedRef) {
     return (
       <Accordion.Item
-        className='bg-yellow-200 focus-within:shadow-mauve12 mt-px overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_0_2px]'
+        className='bg-yellow-200 mt-px overflow-hidden first:mt-0 first:rounded-t last:rounded-b focus-within:relative focus-within:z-10 focus-within:shadow-[0_0_0_2px]'
         {...props}
         ref={forwardedRef}
       >
@@ -38,7 +38,7 @@ export const AccordionTrigger = React.forwardRef<HTMLButtonElement, AccordionTri
     return (
       <Accordion.Header className='flex'>
         <Accordion.Trigger
-          className='text-purple-900 shadow-mauve6 hover:bg-yellow-300 group flex h-[45px] flex-1 cursor-default items-center justify-between bg-blue px-5 text-[15px] leading-none shadow-[0_1px_0] outline-none'
+          className='text-purple-900 hover:bg-yellow-300 group flex h-[45px] flex-1 cursor-default items-center justify-between bg-blue px-5 text-[15px] leading-none shadow-[0_1px_0] outline-none'
           {...props}
           ref={forwardedRef}
         >
