@@ -80,12 +80,14 @@ export default function JobsResults() {
           <SearchForm onSubmit={onSubmitHandler} enteredQuery={query} />
         </div>
       </section>
-      {isLoading.jobs && <RingLoader msg='Obteniendo ofertas de trabajo' />}
+      {isLoading.jobs && <RingLoader msg='Obteniendo ofertas de trabajo' className='mt-20' />}
       {!isLoading.jobs && jobResults.length === 0 && <NotResultsFound />}
       {!isLoading.jobs && jobResults.length > 0 && (
         <section className='flex gap-5 w-full h-[calc(100vh-120px)]'>
           <ListOffers jobDetailsFn={getJobDetails} offers={jobResults} />
-          {isLoading.jobdetails && <RingLoader msg='Obteniendo detalles de la oferta' />}
+          {isLoading.jobdetails && (
+            <RingLoader msg='Obteniendo detalles de la oferta' className='mt-20' />
+          )}
           {!jobDetails && !isLoading.jobdetails && <NotJobSelected />}
           <JobOfferDetails jobOffer={jobDetails} />
         </section>
