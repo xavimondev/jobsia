@@ -72,3 +72,9 @@ export interface ReportInterview {
   interviewdate: string
   totalscore: number
 }
+
+export interface Indicators {
+  seleccionados: number
+  noSeleccionados: number
+  postulantes: number
+}
