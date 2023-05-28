@@ -60,3 +60,16 @@ export interface OffersInterview {
   companyname: string
   positionname: string
 }
+
+export interface ReportInterview {
+  interviewid: string
+  candidateid: string
+  candidate: string
+  candidate: string
+  photo: string
+  city: string
+  jobposition: string
+  company: string
+  interviewdate: string
+  totalscore: string
+}
