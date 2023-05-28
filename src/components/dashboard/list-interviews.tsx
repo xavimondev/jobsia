@@ -1,4 +1,5 @@
 'use client'
+import Image from 'next/image'
 import {
   Card,
   Title,
@@ -9,23 +10,19 @@ import {
   TableHeaderCell,
   TableBody,
   TableCell,
-  Text,
-  Button
+  Text
 } from '@tremor/react'
 import { useStore } from '@/store'
 import { getReadableDate } from '@/utils/getReadableDate'
 import { SCORE_TO_ACCOMPLISH } from '@/utils/constants'
-import { EyeIc } from '@/components/icons'
-import { Tooltip } from '@/components/ui/tooltip'
+import { DialogInterviewDetails } from '@/components/dashboard/dialog-interview-details'
 
 export function ListInterviews() {
   const interviewReport = useStore((state) => state.interviewReport)
 
   return (
     <Card className='mt-6 bg-transparent border border-gray-400 border-opacity-25 ring-0'>
-      <Title className='text-white'>
-        Resultados de entrevistas para el puesto Desarrollo de Software
-      </Title>
+      <Title className='text-white'>Lista de Entrevistas</Title>
       <Table className='mt-5'>
         <TableHead>
           <TableRow>
@@ -53,7 +50,16 @@ export function ListInterviews() {
             interviewReport.map((item) => (
               <TableRow key={item.interviewid}>
                 <TableCell>
-                  <Text className='text-gray-300'>{item.candidate}</Text>
+                  <div className='flex items-center gap-2'>
+                    <Image
+                      src={item.photo}
+                      alt={item.candidate}
+                      width={20}
+                      height={20}
+                      className='rounded-full w-5 h-5'
+                    />
+                    <Text className='text-gray-300'>{item.candidate}</Text>
+                  </div>
                 </TableCell>
                 <TableCell>
                   <Text className='text-gray-300'>{item.city}</Text>
@@ -76,11 +82,11 @@ export function ListInterviews() {
                   </Badge>
                 </TableCell>
                 <TableCell>
-                  <Tooltip text='Click para ver el detalle'>
-                    <Button className='bg-transparent border border-gray-400 border-opacity-25 hover:bg-[#1d1b25]'>
-                      <EyeIc className='h-5 w-5 text-white' />
-                    </Button>
-                  </Tooltip>
+                  <DialogInterviewDetails
+                    candidate={item.candidate}
+                    scoreTotal={item.totalscore}
+                    interviewId={item.interviewid}
+                  />
                 </TableCell>
               </TableRow>
             ))}
