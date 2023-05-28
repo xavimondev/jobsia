@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers'
-import { createClient } from '@supabase/supabase-js'
+import { supabase } from '@/utils/supabase'
 import { Candidate } from '@/types'
 import { ProcessInterview } from '@/components/process-interview'
 import { CheckInterview } from '@/components/check-interview'
@@ -27,10 +27,6 @@ async function getCandidateData() {
 }
 
 async function verifyInterview(candidateId: string, offerId: string) {
-  const supabaseUrl = process.env.SUPABASE_URL as string
-  const supabaseKey = process.env.SUPABASE_KEY as string
-  const supabase = createClient(supabaseUrl, supabaseKey)
-
   const { data } = await supabase
     .from('interviews')
     .select('created_at')

@@ -1,12 +1,7 @@
 import { cookies } from 'next/headers'
 import { NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
 import { Interview } from '@/types'
-
-const supabaseUrl = process.env.SUPABASE_URL as string
-const supabaseKey = process.env.SUPABASE_KEY as string
-
-const supabase = createClient(supabaseUrl, supabaseKey)
+import { supabase } from '@/utils/supabase'
 
 export async function POST(request: Request) {
   try {

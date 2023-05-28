@@ -1,17 +1,13 @@
 import { NextResponse } from 'next/server'
 import { Configuration, OpenAIApi } from 'openai'
-import { createClient } from '@supabase/supabase-js'
+import { supabase } from '@/utils/supabase'
 import { JobOffer } from '@/types'
 
 const openIAKey = process.env.OPEN_IA_KEY as string
-const supabaseUrl = process.env.SUPABASE_URL as string
-const supabaseKey = process.env.SUPABASE_KEY as string
-
 const configuration = new Configuration({
   apiKey: openIAKey
 })
 const openai = new OpenAIApi(configuration)
-const supabase = createClient(supabaseUrl, supabaseKey)
 
 export async function GET(request: Request) {
   const url = new URL(request.url)
