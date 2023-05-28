@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server'
 import { supabase } from '@/utils/supabase'
+import { getIndicators } from '@/utils/getIndicators'
 
 export async function GET(request: Request) {
   const url = new URL(request.url)
@@ -15,9 +16,10 @@ export async function GET(request: Request) {
       error: error.message
     })
   }
-  //console.log(data)
+  const indicators = getIndicators(data)
+
   return NextResponse.json({
-    indicators: [],
+    indicators,
     interviews: data
   })
 }
