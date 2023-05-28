@@ -19,6 +19,7 @@ import { DialogInterviewDetails } from '@/components/dashboard/dialog-interview-
 
 export function ListInterviews() {
   const interviewReport = useStore((state) => state.interviewReport)
+  const isLoadingInterviewReport = useStore((state) => state.isLoadingInterviewReport)
 
   return (
     <Card className='mt-6 bg-transparent border border-gray-400 border-opacity-25 ring-0'>
@@ -36,16 +37,23 @@ export function ListInterviews() {
           </TableRow>
         </TableHead>
         <TableBody>
-          {!interviewReport && (
+          {isLoadingInterviewReport && (
+            <TableRow>
+              <TableCell>
+                <Text className='text-gray-300'>Cargando entrevistas...</Text>
+              </TableCell>
+            </TableRow>
+          )}
+          {interviewReport.length === 0 && !isLoadingInterviewReport && (
             <TableRow>
               <TableCell>
                 <Text className='text-gray-300'>
-                  Selecciona el puesto de tu interés para ver resultados
+                  Selecciona el puesto de tu interés para ver resultados.
                 </Text>
               </TableCell>
             </TableRow>
           )}
-          {interviewReport &&
+          {!isLoadingInterviewReport &&
             interviewReport.length > 0 &&
             interviewReport.map((item) => (
               <TableRow key={item.interviewid}>
