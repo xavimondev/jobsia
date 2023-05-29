@@ -22,7 +22,7 @@ export function ListInterviews() {
   const isLoadingInterviewReport = useStore((state) => state.isLoadingInterviewReport)
 
   return (
-    <Card className='mt-6 bg-transparent border border-gray-400 border-opacity-25 ring-0'>
+    <Card className='mt-6 bg-[#1d1c2d] ring-0'>
       <Title className='text-white'>Lista de Entrevistas</Title>
       <Table className='mt-5'>
         <TableHead>

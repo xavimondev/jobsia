@@ -91,7 +91,7 @@ export function JobOfferDetails({ jobOffer }: JobOfferDetailsProps) {
           <Tooltip text='Click para realizar una entrevista con un asistente de inteligencia artificial.'>
             <Link
               href={`/settings?offerId=${jobOffer.id}`}
-              className='bg-[#13111a] text-[#bac8de] hover:text-white p-4 rounded-full flex items-center hover:animate-tada'
+              className='bg-primary text-[#bac8de] hover:text-white p-4 rounded-full flex items-center hover:animate-tada'
             >
               <SparkleIc className='h-5 w-5' />
             </Link>

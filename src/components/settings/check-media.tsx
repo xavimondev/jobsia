@@ -98,9 +98,9 @@ export function CheckMedia({ offerId }: CheckMediaProps) {
       {configChecking.isAssistantEnabled && configChecking.isMicrophoneEnabled && (
         <Link
           href={`/interview/${offerId}`}
-          className='text-green-400 hover:text-green-200 text-base bg-green-700/[0.5] hover:bg-green-700 py-2 px-4 rounded-md'
+          className='bg-primary border hover:border-opacity-30 border-white border-opacity-10 text-[#bac8de] hover:text-white py-3 px-4 rounded-md'
         >
-          Empezar
+          Empezar Entrevista
         </Link>
       )}
     </>

@@ -22,13 +22,13 @@ export function CheckInterview({ position, company, interviewDate }: CheckInterv
         </p>
         <div className='mt-6 flex items-center gap-4'>
           <Link
-            className='text-green-400 text-base bg-green-700/[0.5] hover:bg-green-900 py-2 px-4 rounded-md flex items-center'
+            className='bg-primary border hover:border-opacity-30 border-white border-opacity-10 text-[#bac8de] hover:text-white py-2 px-4 rounded-md flex items-center'
             href='/'
           >
             Ir a Inicio
           </Link>
           <Link
-            className='text-green-400 text-base bg-green-700/[0.5] hover:bg-green-900 py-2 px-4 rounded-md flex items-center'
+            className='bg-primary border hover:border-opacity-30 border-white border-opacity-10 text-[#bac8de] hover:text-white py-2 px-4 rounded-md flex items-center'
             href={`/jobs?q=${encodeURIComponent(position)}`}
           >
             Realizar una entrevista

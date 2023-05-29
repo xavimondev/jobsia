@@ -7,7 +7,7 @@ export function ListIndicators() {
 
   return (
     <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3 text-white mt-6'>
-      <div className='rounded-lg border border-gray-400 border-opacity-25 shadow-sm'>
+      <div className='rounded-lg shadow-sm bg-[#1d1c2d]'>
         <div className='p-6 flex flex-row items-center justify-between space-y-0 pb-3'>
           <h3 className='font-medium'>Postulantes</h3>
           <UsersIc className='w-6 h-6 text-white' />
@@ -16,7 +16,7 @@ export function ListIndicators() {
           <div className='text-2xl font-bold'>{postulantes}</div>
         </div>
       </div>
-      <div className='rounded-lg border border-gray-400 border-opacity-25 shadow-sm'>
+      <div className='rounded-lg shadow-sm bg-[#1d1c2d]'>
         <div className='p-6 flex flex-row items-center justify-between space-y-0 pb-3'>
           <h3 className='font-medium'>Seleccionados</h3>
           <CheckIc className='w-6 h-6 text-white' />
@@ -25,7 +25,7 @@ export function ListIndicators() {
           <div className='text-2xl font-bold'>{seleccionados}</div>
         </div>
       </div>
-      <div className='rounded-lg border border-gray-400 border-opacity-25 shadow-sm'>
+      <div className='rounded-lg shadow-sm bg-[#1d1c2d]'>
         <div className='p-6 flex flex-row items-center justify-between space-y-0 pb-3'>
           <h3 className='font-medium'>No Seleccionados</h3>
           <NotIc className='w-6 h-6 text-white' />

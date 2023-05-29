@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply bg-[#15131c];
+    @apply bg-[radial-gradient(#272727_1px,#15131c_1.20px)] bg-[length:24px_24px];
   }
 }
 
@@ -17,7 +17,7 @@
 }
 
 .tremor-SelectBox-root:hover {
-  background-color: #1d1b25 !important;
+  background-color: #1d1c2d !important;
 }
 
 .tremor-SelectBox-input::placeholder {

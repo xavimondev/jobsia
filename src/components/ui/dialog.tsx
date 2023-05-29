@@ -19,7 +19,7 @@ export const DialogUi = forwardRef<HTMLDivElement, PropsWithChildren<DialogUiPro
           <Dialog.Content
             {...props}
             ref={forwardRef}
-            className='data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[70vh] h-[50vw] w-[95vw] max-w-[850px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-[#1d1b25] p-[25px] focus:outline-none overflow-scroll'
+            className='data-[state=open]:animate-contentShow fixed top-[50%] left-[50%] max-h-[70vh] h-[50vw] w-[95vw] max-w-[850px] translate-x-[-50%] translate-y-[-50%] rounded-[6px] bg-[#1d1c2d] p-[25px] focus:outline-none overflow-scroll'
           >
             <Dialog.Title className='text-white m-0 text-lg font-medium'>{title}</Dialog.Title>
             {description && (

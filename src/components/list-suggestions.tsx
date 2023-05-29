@@ -32,7 +32,7 @@ function Suggestion({ to, text }: LinkProps) {
   return (
     <Link
       href={to}
-      className='border border-white border-opacity-10 text-sm sm:text-base w-full lg:w-auto hover:border-opacity-30 shadow-md rounded-lg transition duration-200 ease-in-out group hover:-translate-y-1 z-10 bg-[#13111a] text-[#bac8de] hover:text-white p-2'
+      className='border border-white border-opacity-10 text-sm sm:text-base w-full lg:w-auto hover:border-opacity-30 shadow-md rounded-lg transition duration-200 ease-in-out group hover:-translate-y-1 z-10 bg-primary text-[#bac8de] hover:text-white p-2'
     >
       {text}
     </Link>

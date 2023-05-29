@@ -18,7 +18,7 @@ export default function Settings({
       </section>
       <section className='hidden lg:flex flex-row items-center mx-auto max-w-7xl'>
         <div className='full p-2 mr-24 w-[700px]'>
-          <h2 className='font-bold text-3xl text-blue-300 mb-10'>
+          <h2 className='font-bold text-3xl text-white mb-10'>
             Configurando el espacio de trabajo...
           </h2>
           {/* Steps block */}
