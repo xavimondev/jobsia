@@ -108,7 +108,7 @@ const ButtonOpenDialog = forwardRef<HTMLButtonElement>(function ButtonOpenDialog
   forwardRef
 ) {
   return (
-    <Tooltip text='Click para ver detalles de la entrevista'>
+    <Tooltip text='Click para ver detalles de la entrevista' side='bottom' color='#0d0d15'>
       <Button
         className='bg-transparent border border-gray-400 border-opacity-25 hover:bg-[#1d1b25]'
         {...props}

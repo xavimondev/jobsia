@@ -44,6 +44,8 @@ export function Speech({ sendAnswer }: SpeechProps) {
             <MicrophoneBlocked className='text-gray-400 h-16 w-16' />
           ) : (
             <Tooltip
+              side='top'
+              color='#0d0d15'
               text={`${!listening ? 'Click para hablar' : 'Click para enviar tu respuesta'}`}
             >
               {!listening ? (
