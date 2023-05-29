@@ -9,7 +9,7 @@ const handleSubmit = (query: string) => {
 
 export default function Home() {
   return (
-    <main className='p-6 min-h-screen h-full w-full grid place-items-center'>
+    <main className='p-6 min-h-screen h-full w-full grid place-items-center animate-fadeIn animate-delay-150'>
       <section className='mx-auto flex justify-center items-center flex-col py-8 sm:py-10 lg:py-14'>
         <h1
           className='max-w-4xl text-transparent bg-clip-text bg-gradient-to-r from-[#ff8b42] to-[#8b36bb] font-bold text-5xl sm:text-7xl 
