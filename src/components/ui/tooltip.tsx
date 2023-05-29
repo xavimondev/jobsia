@@ -9,8 +9,8 @@ type TooltipProps = {
 }
 
 export function Tooltip({ text, color, side, children }: PropsWithChildren<TooltipProps>) {
-  const bgColor = `bg-[${color}]`
-  const textColor = `text-[${color}]`
+  const bgColor = `${color ? `bg-[${color}]` : 'bg-[#13111a]'}`
+  const textColor = `${color ? `text-[${color}]` : 'text-[#13111a]'}`
   return (
     <TooltipPrimitive.Provider>
       <TooltipPrimitive.Root delayDuration={100}>
@@ -25,9 +25,9 @@ export function Tooltip({ text, color, side, children }: PropsWithChildren<Toolt
           rounded-md 
           px-4 
           py-2.5 
-          ${bgColor ?? 'bg-[#13111a]'}`}
+          ${bgColor}`}
         >
-          <TooltipPrimitive.Arrow className={`fill-current ${textColor ?? 'text-[#13111a]'}`} />
+          <TooltipPrimitive.Arrow className={`fill-current ${textColor}`} />
           <span className='block text-sm leading-none text-gray-100 max-w-sm'>{text}</span>
         </TooltipPrimitive.Content>
       </TooltipPrimitive.Root>
