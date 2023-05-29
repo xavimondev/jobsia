@@ -14,7 +14,9 @@ module.exports = withAnimations({
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
       },
-      colors: {},
+      colors: {
+        'primary': '#0e0c14'
+      },
       keyframes: {
         slideDown: {
           from: { height: 0 },
