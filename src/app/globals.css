@@ -7,3 +7,24 @@
     @apply bg-[#15131c];
   }
 }
+
+.tremor-SelectBox-root {
+  box-shadow: none;
+  background-color: #15131d;
+  border-width: 1px !important;
+  border-color: rgba(156,163,175,0.25) !important;
+}
+
+.tremor-SelectBox-root:hover {
+  background-color: #1d1b25 !important;
+}
+
+.tremor-SelectBox-input::placeholder {
+  color: white !important;
+}
+
+.tremor-SelectBox-root + div {
+  box-shadow: none;
+  border-width: 1px !important;
+  border-color: rgba(156,163,175,0.25) !important;
+}

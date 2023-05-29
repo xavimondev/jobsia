@@ -21,6 +21,7 @@ export function ListOffersInterview({ offers }: ListOffersInterviewProps) {
           value={offer.offerid}
           text={`${offer.positionname} - ${offer.companyname}`}
           key={offer.offerid}
+          className='bg-[#15131d] text-gray-400 hover:text-white hover:bg-[#1d1b25] border-b border-none divide-none'
         />
       ))}
     </SelectBox>
