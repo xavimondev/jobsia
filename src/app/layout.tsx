@@ -20,7 +20,15 @@ export const metadata: Metadata = {
     url: 'https://jobsia.vercel.app/',
     siteName: 'Jobs.ia',
     locale: 'es_ES',
-    type: 'website'
+    type: 'website',
+    images: [
+      {
+        url: '/img/banner.jpg',
+        width: 1578,
+        height: 849,
+        type: 'image/jpeg'
+      }
+    ]
   }
 }
 
