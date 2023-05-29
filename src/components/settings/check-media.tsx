@@ -1,13 +1,14 @@
 'use client'
-import Link from 'next/link'
+import 'regenerator-runtime/runtime'
 import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useSpeechRecognition } from 'react-speech-recognition'
 import { InitialPermissions } from '@/types'
 import { CheckCircleIc, ErrorCircleIc } from '@/components/icons'
-import { AlertMedia } from './alert-media'
+import { AlertMedia } from '@/components/settings/alert-media'
 
 const initialConfig = {
-  isMicrophoneEnabled: false,
-  isAssistantEnabled: false
+  isMicrophoneEnabled: false
 }
 
 type CheckMediaProps = {
@@ -17,7 +18,11 @@ type CheckMediaProps = {
 export function CheckMedia({ offerId }: CheckMediaProps) {
   const [configChecking, setConfigChecking] = useState<InitialPermissions>(initialConfig)
   const [isMicrophoneLoading, setIsMicrophoneLoading] = useState<boolean>(true)
-  const [isAssistantLoading, setIsAssistantLoading] = useState<boolean>(false)
+  const [speechRecognitionSupported, setSpeechRecognitionSupported] = useState<boolean | null>(null)
+  const { browserSupportsSpeechRecognition } = useSpeechRecognition()
+  const showAlertMedia =
+    (!configChecking.isMicrophoneEnabled && !isMicrophoneLoading) ||
+    (speechRecognitionSupported !== null && !speechRecognitionSupported)
 
   useEffect(() => {
     setIsMicrophoneLoading(true)
@@ -37,24 +42,34 @@ export function CheckMedia({ offerId }: CheckMediaProps) {
       })
       .finally(() => {
         setIsMicrophoneLoading(false)
-        // running assistant indicator
-        setIsAssistantLoading(true)
-
-        setTimeout(() => {
-          setIsAssistantLoading(false)
-          setConfigChecking((prevConf) => ({
-            ...prevConf,
-            isAssistantEnabled: true
-          }))
-        }, 2000)
       })
   }, [])
+
+  useEffect(() => {
+    setSpeechRecognitionSupported(browserSupportsSpeechRecognition)
+  }, [browserSupportsSpeechRecognition])
+
   return (
     <>
       <ul className='mb-16'>
         <li className={`flex items-center gap-3 mb-4 text-green-400`}>
           <CheckCircleIc className='w-6 h-6 ' />
           <h3 className='text-lg'>Autenticación</h3>
+        </li>
+        <li
+          className={`flex items-center gap-3 mb-4 ${
+            speechRecognitionSupported === null
+              ? 'text-gray-500 animate-twPulse animate-infinite'
+              : `${!speechRecognitionSupported ? 'text-red-400' : 'text-green-400'}`
+          }
+          }`}
+        >
+          {speechRecognitionSupported !== null && speechRecognitionSupported ? (
+            <CheckCircleIc className='w-6 h-6' />
+          ) : (
+            <ErrorCircleIc className='w-6 h-6' />
+          )}
+          <h3 className='text-lg'>Soporte Reconocimiento de Voz</h3>
         </li>
         <li
           className={`flex items-center gap-3 mb-4 ${
@@ -75,34 +90,20 @@ export function CheckMedia({ offerId }: CheckMediaProps) {
 
           <h3 className='text-lg'>Acceso al micrófono</h3>
         </li>
-        <li
-          className={`flex items-center gap-3 mb-4 ${
-            isAssistantLoading
-              ? 'text-gray-500 animate-twPulse animate-infinite'
-              : `${
-                  !isAssistantLoading && !configChecking.isAssistantEnabled
-                    ? 'text-gray-500'
-                    : 'text-green-400'
-                }`
-          }`}
-        >
-          <CheckCircleIc className='w-6 h-6 ' />
-          <h3 className='text-lg'>Iniciando el asistente</h3>
-        </li>
       </ul>
-      {!configChecking.isMicrophoneEnabled &&
-        !isMicrophoneLoading &&
-        configChecking.isAssistantEnabled && (
-          <AlertMedia message='No tienes el micrófono habilitado 😢. Actívalo para acceder a las entrevistas.' />
-        )}
-      {configChecking.isAssistantEnabled && configChecking.isMicrophoneEnabled && (
-        <Link
-          href={`/interview/${offerId}`}
-          className='bg-primary border hover:border-opacity-30 border-white border-opacity-10 text-[#bac8de] hover:text-white py-3 px-4 rounded-md'
-        >
-          Empezar Entrevista
-        </Link>
+      {showAlertMedia && (
+        <AlertMedia message='Tu navegador no es compatible con algunas características o no has habilitado el acceso al micrófono.' />
       )}
+      {configChecking.isMicrophoneEnabled &&
+        speechRecognitionSupported !== null &&
+        speechRecognitionSupported && (
+          <Link
+            href={`/interview/${offerId}`}
+            className='bg-primary border hover:border-opacity-30 border-white border-opacity-10 text-[#bac8de] hover:text-white py-3 px-4 rounded-md'
+          >
+            Empezar Entrevista
+          </Link>
+        )}
     </>
   )
 }

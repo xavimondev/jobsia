@@ -30,7 +30,6 @@ export interface JobOffer {
 
 export interface InitialPermissions {
   isMicrophoneEnabled: boolean
-  isAssistantEnabled: boolean
 }
 
 export interface Interview {
