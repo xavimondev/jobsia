@@ -34,7 +34,7 @@ export function HeaderInterview({
           }}
         />
         <Image
-          src={photoUrl}
+          src={`${photoUrl}&CameFrom=perfil`}
           width={32}
           height={32}
           alt={`Foto de ${altImage}`}

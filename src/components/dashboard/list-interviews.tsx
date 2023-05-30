@@ -60,7 +60,7 @@ export function ListInterviews() {
                 <TableCell>
                   <div className='flex items-center gap-2'>
                     <Image
-                      src={item.photo}
+                      src={`${item.photo}&CameFrom=perfil`}
                       alt={item.candidate}
                       width={20}
                       height={20}
