@@ -23,14 +23,12 @@ export async function middleware(request: NextRequest) {
   const infojobsUri = process.env.INFOJOBS_REDIRECT_URI as string
   // Checking if there is a refresh_token in cookies
   const refreshTokenExists = request.cookies.has('jobsia.refresh-token')
-  console.log(`Hay un refresh_token: ${refreshTokenExists}`)
   if (refreshTokenExists) {
     const refresTokenValue = request.cookies.get('jobsia.refresh-token')?.value as string
     console.log(`Printing refresh_token: ${refresTokenValue}`)
     const tokens = await generateToken(clientId, clientSecret, true, refresTokenValue, infojobsUri)
-    console.log(`Printing tokens: ${JSON.stringify(tokens)}`)
 
-    if (tokens) {
+    if (!tokens.error) {
       const { access_token, refresh_token, expires_in } = tokens
       // Saving new tokens in cookies
       response.cookies.set('jobsia.access-token', access_token, {
@@ -38,7 +36,7 @@ export async function middleware(request: NextRequest) {
         httpOnly: true
       })
       response.cookies.set('jobsia.refresh-token', refresh_token, {
-        expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), // 1 day
+        expires: new Date(Date.now() + expires_in * 1000), // this may change
         httpOnly: true
       })
     }
@@ -66,16 +64,16 @@ export async function middleware(request: NextRequest) {
 
   // Generating new access token
   const tokens = await generateToken(clientId, clientSecret, false, code, infojobsUri)
-  if (tokens) {
+  if (!tokens.error) {
+    const { access_token, refresh_token, expires_in } = tokens
     // Saving tokens in cookies
-    // TODO: Change this for something more reliable
-    response.cookies.set('jobsia.access-token', tokens.access_token, {
-      expires: new Date(Date.now() + tokens.expires_in * 1000),
+    response.cookies.set('jobsia.access-token', access_token, {
+      expires: new Date(Date.now() + expires_in * 1000),
       httpOnly: true
     })
 
-    response.cookies.set('jobsia.refresh-token', tokens.refresh_token, {
-      expires: new Date(Date.now() + 1 * 24 * 60 * 60 * 1000), // 1 day
+    response.cookies.set('jobsia.refresh-token', refresh_token, {
+      expires: new Date(Date.now() + expires_in * 1000), // this may change
       httpOnly: true
     })
   }
