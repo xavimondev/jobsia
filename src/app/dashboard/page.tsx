@@ -9,6 +9,10 @@ export default async function Dashboard() {
     <section className='p-6 w-full h-screen'>
       <div className='flex-1 p-6'>
         <HeaderDashboard data={data} />
+        <p className='text-gray-300/80 mt-8'>
+          Podrás visualizar los resultados de otros candidatos solo en puestos de trabajo que tengan
+          como mínimo una entrevista realizada.
+        </p>
         <BodyDashboard />
       </div>
     </section>
