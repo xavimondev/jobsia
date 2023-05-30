@@ -10,13 +10,7 @@ type SpeechProps = {
 }
 
 export function Speech({ sendAnswer }: SpeechProps) {
-  const commands = [
-    {
-      command: 'reset',
-      callback: ({ resetTranscript }: any) => resetTranscript()
-    }
-  ]
-  const { transcript, listening, resetTranscript } = useSpeechRecognition({ commands })
+  const { transcript, listening, resetTranscript } = useSpeechRecognition()
   const isAssistantSpeaking = useStore((state) => state.isAssistantSpeaking)
   const setIsAssistantSpeaking = useStore((state) => state.setIsAssistantSpeaking)
 
