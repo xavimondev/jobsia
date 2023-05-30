@@ -86,6 +86,10 @@ export function SkillsInterview({
       resumeOffer
     }
     const data = await startInterview(payload)
+    if (data.error) {
+      console.log(data.error)
+      return
+    }
     /*
       Once I have score, feedback and answer, lets add them into the interview array.
       Then, update current question as long as the interview is not over.
