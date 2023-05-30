@@ -9,7 +9,7 @@ type HeaderDashboardProps = {
 
 export function HeaderDashboard({ data }: HeaderDashboardProps) {
   return (
-    <div className='flex items-center justify-between text-white'>
+    <div className='flex flex-col xl:flex-row gap-4 xl:gap-0 items-center justify-normal xl:justify-between text-white'>
       <nav className='flex text-2xl' aria-label='Breadcrumb'>
         <ol className='inline-flex items-center space-x-1 md:space-x-3'>
           <li className='inline-flex items-center'>
