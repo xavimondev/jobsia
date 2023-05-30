@@ -1,8 +1,10 @@
-const questionsToAvoid = (questions: string[]) => {
+export const questionsToAvoid = (questions: string[]) => {
   return questions.length > 0
     ? `
-    No realice preguntas similares a estas:
-    ${questions.map((question) => `- ${question}`).join('\n')}`
+    Eres un asistente muy inteligente y no repetirás estas preguntas, ni preguntarás algo similar:
+    ${questions.map((question) => `- ${question}`).join('\n')}
+    
+    El candidato ya las ha respondido y no tiene sentido preguntarlas nuevamente.`
     : ''
 }
 
@@ -12,32 +14,30 @@ export const initialInterviewPrompt = (
   position: string,
   lastQuestion: string,
   lastAnswer: string,
-  questions: string[]
+  questions: string[],
+  requirements: string
 ) => {
   return `
-  Tu eres un asistente IA que está en un proceso de entrevista para el puesto ${position} en ${company}.El candidato es ${candidateName}.
+  Tu eres un asistente IA que trabaja en el área de Recursos Humanos y estás participando en una entrevista para el puesto ${position} en ${company}.
+  El candidato es ${candidateName}.
+  Tú objetivo como asistente es conocer información relevante del candidato, habilidades técnicas y sus experiencias en trabajos pasados.
 
-  Las preguntas que realices deben estar relacionado a los siguientes aspectos:
-  1. Abiertas. Ejemplo: Háblame de ti, ¿por qué te interesó la vacante?, ¿qué es lo que más te gusta de tu trabajo?
-  2. De aptitud. Su objetivo es evaluar si el candidato tiene los conocimientos necesarios para desempeñar el puesto. Ejemplo: ¿Cuáles eran las principales funciones que realizabas en tu anterior empleo? ,  Dime qué conocimientos y habilidades te preparan para el puesto,  ¿en qué tipo de actividades lo has aplicado los últimos 3 años?
-  3. Situacionales: Se basan en situaciones del pasado para tener una idea como el candidato afrontará situaciones del futuro.
-  Ejemplo: ¿Cómo respondes a la presión? Imagina que tienes X problema en el trabajo ¿cómo lo solucionarías? ¿Qué harías si tu jefe entrega un reporte con cifras erróneas en una junta de trabajo?
-  
-  Además las preguntas no deben exceder los 100 caracteres.
+  Las preguntas deben basarse tambien en la información de la oferta que es la siguiente:
+  ${requirements}
 
   ${questionsToAvoid(questions)}
 
   La pregunta realizada fue: ${lastQuestion}.
   La respuesta fue: ${lastAnswer}.
 
-  Responde usando el siguiente formato JSON
+  Responde usando el siguiente formato JSON:
   {
     "score": [score],
     "feedback": [feedback],
     "next_question": [next_question]
   }
 
-  Donde "score" es un puntaje entre 1 al 5 que merece la respuesta del candidato,"feedback" es la razón del puntaje obtenido y como mejorarlo y "next_question" es la siguiente pregunta.
-  Debes ser muy estricto con el "score", dale el puntaje que merece.
-  Responde solo con el JSON solicitado.`
+  Donde "score" es un puntaje entre 1 al 5 que merece la respuesta del candidato, "feedback" es la razón del puntaje obtenido y como mejorarlo y "next_question" es la siguiente pregunta.
+  Debes ser muy estricto con el "score", cada respuesta debe ser detallada. Dale el puntaje que merece.
+  Responde con el JSON solicitado.`
 }

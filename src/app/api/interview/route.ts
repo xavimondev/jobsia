@@ -11,16 +11,16 @@ const openai = new OpenAIApi(configuration)
 
 export async function POST(request: Request) {
   const body = await request.json()
-  const { candidate, position, company, currentQuestion, userAnswer, questions } = body
-  // if it gets to the end of the interview, just say bye
-  // otherwise, continue with the interview
+  const { candidate, position, company, currentQuestion, userAnswer, questions, resumeOffer } = body
+
   const content = initialInterviewPrompt(
     candidate,
     company,
     position,
     currentQuestion,
     userAnswer,
-    questions
+    questions,
+    resumeOffer
   )
 
   const response = await openai.createChatCompletion({
@@ -37,7 +37,15 @@ export async function POST(request: Request) {
   try {
     const json = JSON.parse(data)
     return NextResponse.json(json)
-  } catch {
-    return new Response('Something was wrong with the OpenIA API', { status: 500 })
+  } catch (error) {
+    console.log(error)
+    return NextResponse.json(
+      {
+        error: 'Something went wrong with the OpenAI API'
+      },
+      {
+        status: 500
+      }
+    )
   }
 }
