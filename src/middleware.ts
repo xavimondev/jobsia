@@ -25,7 +25,6 @@ export async function middleware(request: NextRequest) {
   const refreshTokenExists = request.cookies.has('jobsia.refresh-token')
   if (refreshTokenExists) {
     const refresTokenValue = request.cookies.get('jobsia.refresh-token')?.value as string
-    console.log(`Printing refresh_token: ${refresTokenValue}`)
     const tokens = await generateToken(clientId, clientSecret, true, refresTokenValue, infojobsUri)
 
     if (!tokens.error) {

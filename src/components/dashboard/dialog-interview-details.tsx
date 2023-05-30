@@ -40,7 +40,6 @@ function ContentDialog({ interviewId }: ContentDialogProps) {
       fetch(`/api/interview-details?id=${interviewId}`)
         .then((res) => res.json())
         .then((resp) => {
-          //console.log(resp.data)
           if (!resp.error) {
             const { interview_details } = resp.data
             setInterviewDetails(interview_details)

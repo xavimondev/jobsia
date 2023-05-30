@@ -53,7 +53,6 @@ export default async function Interview({ params: { id } }: { params: { id: stri
   } = jobDetails
 
   const { id: candidateId, photo, name, fullName, surname1, surname2, province } = candidateDetails
-  console.log(province.value)
   const candidate: Candidate = {
     id: candidateId,
     name,
