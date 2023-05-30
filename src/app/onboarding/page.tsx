@@ -4,9 +4,6 @@ import { DayMomentNight } from '@/components/illustrations'
 export default function Onboarding() {
   return (
     <div className='p-6 h-screen grid place-items-center'>
-      <section className='block lg:hidden mr-6'>
-        <h1>No puedes acceder a este modulo desde el móvil</h1>
-      </section>
       <section className='hidden lg:flex flex-row items-center mx-auto max-w-7xl'>
         <div className='w-full'>
           <h1 className='font-bold text-5xl text-blue-300 mb-5'>Bienvenido a Interview.ia</h1>
