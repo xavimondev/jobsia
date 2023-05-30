@@ -52,22 +52,15 @@ export default async function Interview({ params: { id } }: { params: { id: stri
     contractType
   } = jobDetails
 
-  const {
-    id: candidateId,
-    photo,
-    name,
-    fullName,
-    surname1,
-    surname2,
-    city: cityCandidate
-  } = candidateDetails
+  const { id: candidateId, photo, name, fullName, surname1, surname2, province } = candidateDetails
+  console.log(province.value)
   const candidate: Candidate = {
     id: candidateId,
     name,
     surname1,
     surname2,
     fullName,
-    city: cityCandidate,
+    city: province?.value ?? 'No especificó',
     photo
   }
   const interviewData = await verifyInterview(candidate.id, id)
