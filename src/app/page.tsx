@@ -1,7 +1,9 @@
 'use client'
 import { redirect } from 'next/navigation'
+import Link from 'next/link'
 import { SearchForm } from '@/components/search-form'
 import { ListSuggestions } from '@/components/list-suggestions'
+import { DashboardIc } from '@/components/icons'
 
 const handleSubmit = (query: string) => {
   redirect(`/jobs?q=${encodeURIComponent(query)}`)
@@ -17,9 +19,16 @@ export default function Home() {
         >
           jobs.ia
         </h1>
-        <h2 className='text-[#bac8de] italic mb-8 text-sm sm:text-lg max-w-4xl text-center'>
+        <h2 className='text-[#bac8de] italic mb-4 text-sm sm:text-lg max-w-4xl text-center'>
           Disponible para desarrolladores, administradores de base de datos y diseñadores web
         </h2>
+        <Link
+          href='/dashboard'
+          className='flex gap-2 items-center text-[#bac8de] hover:text-white semibold p-2 bg-primary rounded-lg text-center border border-white border-opacity-10 mb-4 text-sm sm:text-base'
+        >
+          <DashboardIc className='w-4 h-4' />
+          Deseo ir al dashboard
+        </Link>
         <SearchForm onSubmit={handleSubmit} enteredQuery='' />
         <ListSuggestions />
       </section>
