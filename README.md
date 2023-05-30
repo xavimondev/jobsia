@@ -10,7 +10,7 @@ Es una plataforma web con búsqueda avanzada de trabajo en la que podrás ser en
 
 ## Funcionalidades
 
-### Búsqueda avanzada con IA
+### ✨ Búsqueda avanzada con IA
 
 Este buscador utiliza la tecnología [Embeddings](https://platform.openai.com/docs/guides/embeddings) que pertenece a OpenIA.
 
@@ -32,7 +32,7 @@ El endpoint de infojobs utilizado fue: `https://api.infojobs.net/api/9/offer?sub
 
 Desarrolle un script que recorre 114 páginas de ofertas de trabajo usando el endpoint mencionado y por cada una de estas generaba el **embedding** para posteriormente almacenarlo en base de datos.
 
-### Entrevista con Asistente IA
+### ✨ Entrevista con Asistente IA
 
 El asistente recibe información de la oferta de trabajo y mediante un [prompt](/src/utils/prompt.ts) genera las preguntas aleatoriamente y brinda puntaje y feedback por cada respuesta del candidato.
 
@@ -62,7 +62,7 @@ En **caniuse** se puede ver la compatibilidad de [SpeechRecognition](https://can
 
 En el caso de Chrome parece ser un bug, ya que reproduce parte del texto del asistente y repentinamente se detiene.
 
-### Dashboard
+### ✨ Dashboard
 
 Podrás visualizar los resultados de los postulantes por cada oferta de trabajo. Cuenta con indicadores como la cantidad de postulantes, candidatos que aprobaron y desaprobaron la entrevista.
 
