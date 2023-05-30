@@ -12,9 +12,15 @@ type SkillsInterviewProps = {
   candidate: Candidate
   position: string
   company: string
+  resumeOffer: string
 }
 
-export function SkillsInterview({ candidate, position, company }: SkillsInterviewProps) {
+export function SkillsInterview({
+  candidate,
+  position,
+  company,
+  resumeOffer
+}: SkillsInterviewProps) {
   const initialMessage = `¡Bienvenido, ${candidate.name}! La siguiente entrevista será para el puesto ${position}.
   Durante la entrevista, exploraremos diferentes aspectos para evaluar tu idoneidad en el puesto. !Mucha suerte!`
 
@@ -69,7 +75,6 @@ export function SkillsInterview({ candidate, position, company }: SkillsIntervie
     if (!userAnswer) return
 
     setIsGeneratingNextQuestion(true)
-
     const questions = interview.map((intw) => intw.question)
     const payload = {
       candidate: candidate.name,
@@ -77,8 +82,8 @@ export function SkillsInterview({ candidate, position, company }: SkillsIntervie
       company,
       currentQuestion,
       userAnswer,
-      totalQuestions: interview.length,
-      questions
+      questions,
+      resumeOffer
     }
     const data = await startInterview(payload)
     /*

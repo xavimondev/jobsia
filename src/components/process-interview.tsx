@@ -10,9 +10,15 @@ type ProcessInterviewProps = {
   position: string
   company: string
   candidate: Candidate
+  resumeOffer: string
 }
 
-export function ProcessInterview({ position, company, candidate }: ProcessInterviewProps) {
+export function ProcessInterview({
+  position,
+  company,
+  candidate,
+  resumeOffer
+}: ProcessInterviewProps) {
   const { name, fullName, photo } = candidate
   const endInterviewStatus = useStore((state) => state.endInterviewStatus)
   const isEndInterview = endInterviewStatus.isInterviewSaved && endInterviewStatus.isLastSpeech
@@ -29,7 +35,12 @@ export function ProcessInterview({ position, company, candidate }: ProcessInterv
               photoUrl={photo}
               altImage={name}
             />
-            <SkillsInterview candidate={candidate} position={position} company={company} />
+            <SkillsInterview
+              candidate={candidate}
+              position={position}
+              company={company}
+              resumeOffer={resumeOffer}
+            />
           </div>
           <StatsInterview />
         </section>

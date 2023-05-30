@@ -1,6 +1,7 @@
 import { cookies } from 'next/headers'
-import { supabase } from '@/utils/supabase'
 import { Candidate } from '@/types'
+import { getResumeOffer } from '@/utils/getResumeOffer'
+import { supabase } from '@/utils/supabase'
 import { ProcessInterview } from '@/components/process-interview'
 import { CheckInterview } from '@/components/check-interview'
 
@@ -43,7 +44,12 @@ export default async function Interview({ params: { id } }: { params: { id: stri
   const [jobDetails, candidateDetails] = await Promise.all([jobOfferData, candidateData])
   const {
     title,
-    profile: { name: companyName }
+    profile: { name: companyName },
+    salaryDescription,
+    minRequirements,
+    experienceMin,
+    studiesMin,
+    contractType
   } = jobDetails
 
   const {
@@ -65,8 +71,22 @@ export default async function Interview({ params: { id } }: { params: { id: stri
     photo
   }
   const interviewData = await verifyInterview(candidate.id, id)
+  const resumeOffer = getResumeOffer(
+    salaryDescription,
+    experienceMin.value,
+    studiesMin.value,
+    contractType.value,
+    minRequirements
+  )
   if (interviewData!.length === 0)
-    return <ProcessInterview position={title} company={companyName} candidate={candidate} />
+    return (
+      <ProcessInterview
+        position={title}
+        company={companyName}
+        candidate={candidate}
+        resumeOffer={resumeOffer}
+      />
+    )
 
   return (
     <CheckInterview
