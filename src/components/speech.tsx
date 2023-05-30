@@ -24,6 +24,9 @@ export function Speech({ sendAnswer }: SpeechProps) {
   }
 
   const stopHandle = () => {
+    if (!transcript && transcript.length === 0) {
+      return
+    }
     SpeechRecognition.stopListening()
     setIsAssistantSpeaking(true)
     sendAnswer(transcript)
