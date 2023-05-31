@@ -6,6 +6,12 @@ type Context = {
   params: { id: string }
 }
 
+export const runtime = 'edge'
+export const size = {
+  width: 1200,
+  height: 630
+}
+
 export default async function og({ params }: Context) {
   const offerId = params.id
 
