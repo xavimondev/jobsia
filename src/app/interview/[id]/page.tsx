@@ -1,9 +1,42 @@
+import { Metadata } from 'next'
 import { cookies } from 'next/headers'
 import { Candidate } from '@/types'
 import { getResumeOffer } from '@/utils/getResumeOffer'
 import { supabase } from '@/utils/supabase'
 import { ProcessInterview } from '@/components/process-interview'
 import { CheckInterview } from '@/components/check-interview'
+
+export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+  const response = await fetch(`https://api.infojobs.net/api/7/offer/${params.id}`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Basic ${process.env.INFOJOBS_TOKEN}`
+    }
+  })
+
+  const data = await response.json()
+  const {
+    id,
+    title,
+    profile: { name: companyName }
+  } = data
+
+  return {
+    title: `Jobsia | Entrevista para el puesto ${title} en la compañia ${companyName}`,
+    description: `Entrevista para el puesto ${title} en la compañia ${companyName}`,
+    openGraph: {
+      type: 'website',
+      url: `https://jobsia.vercel.app/interview/${id}`,
+      locale: 'es_ES',
+      images: [
+        {
+          url: `https://jobsia.vercel.app/interview/${id}/opengraph-image`,
+          type: 'image/png'
+        }
+      ]
+    }
+  }
+}
 
 async function getJobOfferDetails(offerId: string) {
   const response = await fetch(`https://api.infojobs.net/api/7/offer/${offerId}`, {
