@@ -6,7 +6,7 @@ import { ScoreInterview } from './score-interview'
 
 export function ResultsInterview() {
   const getTotalScore = useStore((state) => state.getTotalScore)
-  const hasIdealScore = getTotalScore() === SCORE_TO_ACCOMPLISH
+  const hasIdealScore = getTotalScore() >= SCORE_TO_ACCOMPLISH
 
   return (
     <section className='p-6 w-full h-screen grid place-items-center animate-fadeIn'>
