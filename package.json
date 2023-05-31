@@ -30,6 +30,7 @@
     "eslint-config-next": "13.4.2",
     "eslint-config-prettier": "8.8.0",
     "eslint-plugin-react-hooks": "4.6.0",
+    "js-confetti": "0.11.0",
     "next": "13.4.2",
     "openai": "3.2.1",
     "postcss": "8.4.23",
