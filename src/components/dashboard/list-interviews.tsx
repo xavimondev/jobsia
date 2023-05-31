@@ -84,7 +84,7 @@ export function ListInterviews() {
                 <TableCell>
                   <Badge
                     className='font-bold'
-                    color={SCORE_TO_ACCOMPLISH === item.totalscore ? 'green' : 'red'}
+                    color={item.totalscore >= SCORE_TO_ACCOMPLISH ? 'green' : 'red'}
                   >
                     {item.totalscore}
                   </Badge>

@@ -9,7 +9,7 @@ export const getIndicators = (report: ReportInterview[]) => {
   }
 
   report.forEach((interview) => {
-    const isApproved = interview.totalscore === SCORE_TO_ACCOMPLISH
+    const isApproved = interview.totalscore >= SCORE_TO_ACCOMPLISH
     if (isApproved) indicators['seleccionados']++
     else indicators['noSeleccionados']++
   })

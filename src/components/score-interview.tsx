@@ -3,7 +3,7 @@ import { useStore } from '@/store'
 
 export function ScoreInterview() {
   const getTotalScore = useStore((state) => state.getTotalScore)
-  const hasIdealScore = getTotalScore() === SCORE_TO_ACCOMPLISH
+  const hasIdealScore = getTotalScore() >= SCORE_TO_ACCOMPLISH
   const gradientStyles = `text-transparent bg-clip-text bg-gradient-to-r ${
     hasIdealScore ? 'from-[#b6eead] to-[#59bc6b]' : 'from-[#ee6b69] to-[#e15050]'
   }`
