@@ -20,6 +20,7 @@ export const saveInterview = async (payload: {
   const response = await fetch(`${SERVER_ENDPOINT}/api/end-interview`, {
     method: 'POST',
     body: JSON.stringify(payload),
+    credentials: 'include',
     headers: {
       'Content-type': 'application/json'
     }

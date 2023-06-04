@@ -1,7 +1,6 @@
 import express, { Application } from 'express'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
-import { ORIGINS_ALLOWED, PORT } from './constants'
 import jobsRoute from './routes/jobs.route'
 import interviewsRoute from './routes/interviews.route'
 import dashboardRoute from './routes/dasboard.route'
@@ -20,7 +19,9 @@ class Server {
   middlewares() {
     this.app.use(
       cors({
-        methods: ['GET', 'POST']
+        methods: ['GET', 'POST'],
+        origin: process.env.URL_ORIGIN_ALLOWED,
+        credentials: true,
       })
     )
     this.app.use(express.json())
