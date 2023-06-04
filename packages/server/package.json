@@ -1,7 +1,7 @@
 {
   "name": "jobsia-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Server for jobsia",
   "main": "index.js",
   "scripts": {
     "build": "npm install && tsc",
@@ -11,7 +11,7 @@
   "author": "xavimon",
   "license": "ISC",
   "dependencies": {
-    "@supabase/supabase-js": "^2.24.0",
+    "@supabase/supabase-js": "2.24.0",
     "cookie-parser": "1.4.6",
     "cors": "2.8.5",
     "dotenv": "16.1.3",
