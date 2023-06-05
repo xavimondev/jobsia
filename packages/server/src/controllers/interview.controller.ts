@@ -65,7 +65,7 @@ export const generateNextQuestion = async (req: Request, res: Response) => {
 export const endInterview = async (req: Request, res: Response) => {
   try {
     const body = req.body
-    const { candidate, interviewDetails } = body
+    const { offerId, candidate, interviewDetails } = body
     const { id, photo, name, surname1, surname2, city } = candidate
 
     //Saving candidate data
@@ -91,10 +91,6 @@ export const endInterview = async (req: Request, res: Response) => {
       candidateId = data![0].id
     }
     // Saving interview
-    // Getting offerId from cookies
-    const cookieStore = req.cookies
-    const offerId = cookieStore['jobsia.offer-id']
-    // jobsia.offer - id
     const { data } = await supabase
       .from('interviews')
       .insert({

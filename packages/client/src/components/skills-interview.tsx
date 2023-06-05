@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import { useParams } from 'next/navigation'
 import { Candidate, Interview } from '../types'
 import { INTERVIEW_TOTAL_QUESTIONS } from '../utils/constants'
 import { getByeMessage } from '../utils/getByeMessage'
@@ -24,6 +25,7 @@ export function SkillsInterview({
   const initialMessage = `¡Bienvenido, ${candidate.name}! La siguiente entrevista será para el puesto ${position}.
   Durante la entrevista, exploraremos diferentes aspectos para evaluar tu idoneidad en el puesto. !Mucha suerte!`
 
+  const {id: offerId} = useParams()
   const [currentQuestion, setCurrentQuestion] = useState<string | undefined>(undefined)
   const [isGeneratingNextQuestion, setIsGeneratingNextQuestion] = useState<boolean>(false)
   const [byeMessage, setByeMessage] = useState<string>('')
@@ -107,6 +109,7 @@ export function SkillsInterview({
     if (interview.length + 1 === INTERVIEW_TOTAL_QUESTIONS) {
       // Saving interview's data in database
       const payloadEnd = {
+        offerId,
         candidate,
         interviewDetails: interview.concat(messageInterview) // I do this because state is async, I guess there's a best way to do this
       }
