@@ -1,0 +1,7 @@
+export const INFOJOBS_AUTH = 'https://www.infojobs.net/oauth/authorize'
+export const API_INFOJOBS = `https://api.infojobs.net/api/7/offer`
+const INTERVIEW_TOTAL_QUESTIONS = 10
+const QUESTION_MAX_SCORE = 5
+const INTERVIEW_MAX_SCORE = INTERVIEW_TOTAL_QUESTIONS * QUESTION_MAX_SCORE
+const INTERVIEW_PERCENTAGE = 0.6
+export const SCORE_TO_ACCOMPLISH = INTERVIEW_MAX_SCORE * INTERVIEW_PERCENTAGE
