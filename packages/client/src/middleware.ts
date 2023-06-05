@@ -1,5 +1,5 @@
 import { NextResponse, NextRequest } from 'next/server'
-import { generateToken } from './services/auth'
+import { generateToken } from '@/services/auth'
 
 export async function middleware(request: NextRequest) {
   const url = new URL(request.url)

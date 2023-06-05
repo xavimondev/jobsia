@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import { SearchIc } from './icons'
+import { SearchIc } from '@/components/icons'
 
 type SearchFormProps = {
   enteredQuery: string

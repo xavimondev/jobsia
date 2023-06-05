@@ -1,6 +1,6 @@
-import { Interview } from '../types'
-import { useStore } from '../store'
-import AccordionUi, { AccordionContent, AccordionItem, AccordionTrigger } from './ui/accordion'
+import { Interview } from '@/types'
+import { useStore } from '@/store'
+import AccordionUi, { AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 export function DetailsInterview() {
   const interview = useStore((state) => state.interview)

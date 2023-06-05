@@ -1,8 +1,8 @@
 import { PropsWithChildren } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { JobOffer, Skill } from '../types'
-import { Tooltip } from './ui/tooltip'
+import { JobOffer, Skill } from '@/types'
+import { Tooltip } from '@/components/ui/tooltip'
 import {
   CheckIc,
   DoubleCheckIc,
@@ -12,7 +12,7 @@ import {
   SparkleIc,
   StudyIc,
   YoungIc
-} from './icons'
+} from '@/components/icons'
 
 type JobOfferDetailsProps = {
   jobOffer: JobOffer | undefined

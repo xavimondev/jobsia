@@ -1,4 +1,4 @@
-import { supabase } from '../utils/supabase'
+import { supabase } from '@/utils/supabase'
 
 export const getOffersCompany = async () => {
   const { data, error } = await supabase.rpc('get_positions_company')

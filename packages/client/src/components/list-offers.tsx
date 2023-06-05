@@ -1,5 +1,5 @@
-import { JobOffer } from '../types'
-import { LocationIc, MoneyIc, YoungIc } from './icons'
+import { JobOffer } from '@/types'
+import { LocationIc, MoneyIc, YoungIc } from '@/components/icons'
 
 type ListOffersProps = {
   jobDetailsFn: (offerId: string) => Promise<void>

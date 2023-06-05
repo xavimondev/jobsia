@@ -1,5 +1,5 @@
 import { create } from 'zustand'
-import { EndInterviewStatus, Indicators, Interview, ReportInterview } from './types'
+import { EndInterviewStatus, Indicators, Interview, ReportInterview } from '@/types'
 
 type State = {
   interview: Interview[]

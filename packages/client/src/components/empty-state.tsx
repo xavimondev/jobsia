@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react'
-import { NoSearchResults, WaitingSearch } from './illustrations'
+import { NoSearchResults, WaitingSearch } from '@/components/illustrations'
 
 export function NotResultsFound() {
   return (

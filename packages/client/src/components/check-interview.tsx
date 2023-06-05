@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { getReadableDate } from '../utils/getReadableDate'
-import { NotInterviewAllowed } from './empty-state'
-import { Blocked } from './illustrations'
+import { getReadableDate } from '@/utils/getReadableDate'
+import { NotInterviewAllowed } from '@/components/empty-state'
+import { Blocked } from '@/components/illustrations'
 
 type CheckInterviewProps = {
   position: string

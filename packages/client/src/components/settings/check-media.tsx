@@ -3,9 +3,9 @@ import 'regenerator-runtime/runtime'
 import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { useSpeechRecognition } from 'react-speech-recognition'
-import { InitialPermissions } from '../../types'
-import { CheckCircleIc, ErrorCircleIc } from '../icons'
-import { AlertMedia } from './alert-media'
+import { InitialPermissions } from '@/types'
+import { CheckCircleIc, ErrorCircleIc } from '@/components/icons'
+import { AlertMedia } from '@/components/settings/alert-media'
 
 const initialConfig = {
   isMicrophoneEnabled: false

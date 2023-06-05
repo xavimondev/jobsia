@@ -1,13 +1,13 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'next/navigation'
-import { Candidate, Interview } from '../types'
-import { INTERVIEW_TOTAL_QUESTIONS } from '../utils/constants'
-import { getByeMessage } from '../utils/getByeMessage'
-import { useStore } from '../store'
-import { saveInterview, startInterview } from '../services/interview'
-import { LineWobbleLoader } from './loaders'
-import { Speech } from './speech'
+import { Candidate, Interview } from '@/types'
+import { INTERVIEW_TOTAL_QUESTIONS } from '@/utils/constants'
+import { getByeMessage } from '@/utils/getByeMessage'
+import { useStore } from '@/store'
+import { saveInterview, startInterview } from '@/services/interview'
+import { LineWobbleLoader } from '@/components/loaders'
+import { Speech } from '@/components/speech'
 
 type SkillsInterviewProps = {
   candidate: Candidate

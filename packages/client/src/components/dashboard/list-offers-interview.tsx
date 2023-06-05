@@ -1,7 +1,7 @@
 'use client'
 import { SelectBox, SelectBoxItem } from '@tremor/react'
-import { OffersInterview } from '../../types'
-import { useStore } from '../../store'
+import { OffersInterview } from '@/types'
+import { useStore } from '@/store'
 
 type ListOffersInterviewProps = {
   offers: OffersInterview[]

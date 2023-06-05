@@ -12,10 +12,10 @@ import {
   TableCell,
   Text
 } from '@tremor/react'
-import { useStore } from '../../store'
-import { getReadableDate } from '../../utils/getReadableDate'
-import { SCORE_TO_ACCOMPLISH } from '../../utils/constants'
-import { DialogInterviewDetails } from './dialog-interview-details'
+import { useStore } from '@/store'
+import { getReadableDate } from '@/utils/getReadableDate'
+import { SCORE_TO_ACCOMPLISH } from '@/utils/constants'
+import { DialogInterviewDetails } from '@/components/dashboard/dialog-interview-details'
 
 export function ListInterviews() {
   const interviewReport = useStore((state) => state.interviewReport)

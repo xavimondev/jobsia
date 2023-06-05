@@ -1,9 +1,9 @@
 'use client'
 import 'regenerator-runtime/runtime'
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition'
-import { useStore } from '../store'
-import { MicrophoneBlocked, MicrophoneIc, StopVoiceIc } from './icons'
-import { Tooltip } from './ui/tooltip'
+import { useStore } from '@/store'
+import { MicrophoneBlocked, MicrophoneIc, StopVoiceIc } from '@/components/icons'
+import { Tooltip } from '@/components/ui/tooltip'
 
 type SpeechProps = {
   sendAnswer: (userAnswer: string) => void

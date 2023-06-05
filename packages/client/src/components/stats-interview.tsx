@@ -1,11 +1,11 @@
 'use client'
 import { useMemo } from 'react'
-import { useStore } from '../store'
+import { useStore } from '@/store'
 import {
   INTERVIEW_MAX_SCORE,
   SCORE_TO_ACCOMPLISH,
   INTERVIEW_TOTAL_QUESTIONS
-} from '../utils/constants'
+} from '@/utils/constants'
 
 export function StatsInterview() {
   const getTotalScore = useStore((state) => state.getTotalScore)

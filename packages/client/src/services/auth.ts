@@ -1,4 +1,4 @@
-import { INFOJOBS_AUTH } from '../utils/constants'
+import { INFOJOBS_AUTH } from '@/utils/constants'
 
 export const generateToken = async (
   clientId: string,

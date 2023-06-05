@@ -1,5 +1,5 @@
-import { SCORE_TO_ACCOMPLISH } from '../utils/constants'
-import { useStore } from '../store'
+import { SCORE_TO_ACCOMPLISH } from '@/utils/constants'
+import { useStore } from '@/store'
 
 export function ScoreInterview() {
   const getTotalScore = useStore((state) => state.getTotalScore)

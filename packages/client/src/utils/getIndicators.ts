@@ -1,5 +1,5 @@
-import { Indicators, ReportInterview } from '../types'
-import { SCORE_TO_ACCOMPLISH } from './constants'
+import { Indicators, ReportInterview } from '@/types'
+import { SCORE_TO_ACCOMPLISH } from '@/utils/constants'
 
 export const getIndicators = (report: ReportInterview[]) => {
   const indicators: Indicators = {

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { DetailsInterview } from './details-interview'
+import { DetailsInterview } from '@/components/details-interview'
 
 export function FeedbackInterview() {
   return (

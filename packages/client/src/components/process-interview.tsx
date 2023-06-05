@@ -1,10 +1,10 @@
 'use client'
-import { useStore } from '../store'
-import { Candidate } from '../types'
-import { HeaderInterview } from './header-interview'
-import { SkillsInterview } from './skills-interview'
-import { StatsInterview } from './stats-interview'
-import { ResultsInterview } from './results-interview'
+import { useStore } from '@/store'
+import { Candidate } from '@/types'
+import { HeaderInterview } from '@/components/header-interview'
+import { SkillsInterview } from '@/components/skills-interview'
+import { StatsInterview } from '@/components/stats-interview'
+import { ResultsInterview } from '@/components/results-interview'
 
 type ProcessInterviewProps = {
   position: string

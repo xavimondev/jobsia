@@ -1,4 +1,4 @@
-import { formatString } from './formatString'
+import { formatString } from '@/utils/formatString'
 
 export const getResumeOffer = (
   salaryDescription: string,

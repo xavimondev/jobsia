@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { OffersInterview } from '../../types'
-import { ListOffersInterview } from './list-offers-interview'
-import { CaretRight, HomeIc } from '../icons'
+import { OffersInterview } from '@/types'
+import { ListOffersInterview } from '@/components/dashboard/list-offers-interview'
+import { CaretRight, HomeIc } from '@/components/icons'
 
 type HeaderDashboardProps = {
   data: OffersInterview[]

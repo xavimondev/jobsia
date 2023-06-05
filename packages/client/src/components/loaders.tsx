@@ -1,5 +1,5 @@
 import { LineWobble } from '@uiball/loaders'
-import { LoadingIc } from './icons'
+import { LoadingIc } from '@/components/icons'
 
 type RingLoaderProps = {
   msg: string

@@ -2,7 +2,7 @@
 import React, { HTMLProps, PropsWithChildren } from 'react'
 import * as Accordion from '@radix-ui/react-accordion'
 import { AccordionContentProps, AccordionTriggerProps } from '@radix-ui/react-accordion'
-import { ChevronDownIc } from '../icons'
+import { ChevronDownIc } from '@/components/icons'
 
 const AccordionUi = ({ children }: PropsWithChildren) => (
   <Accordion.Root

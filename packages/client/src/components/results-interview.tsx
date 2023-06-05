@@ -1,11 +1,11 @@
 'use client'
 import { useEffect } from 'react'
 import JSConfetti from 'js-confetti'
-import { SCORE_TO_ACCOMPLISH } from '../utils/constants'
-import { useStore } from '../store'
-import { Discarded, EvaluationExcellent } from './illustrations'
-import { FeedbackInterview } from './feedback-interview'
-import { ScoreInterview } from './score-interview'
+import { SCORE_TO_ACCOMPLISH } from '@/utils/constants'
+import { useStore } from '@/store'
+import { Discarded, EvaluationExcellent } from '@/components/illustrations'
+import { FeedbackInterview } from '@/components/feedback-interview'
+import { ScoreInterview } from '@/components/score-interview'
 
 export function ResultsInterview() {
   const getTotalScore = useStore((state) => state.getTotalScore)

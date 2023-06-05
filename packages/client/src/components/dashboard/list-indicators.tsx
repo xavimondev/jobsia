@@ -1,5 +1,5 @@
-import { useStore } from '../../store'
-import { CheckIc, NotIc, UsersIc } from '../icons'
+import { useStore } from '@/store'
+import { CheckIc, NotIc, UsersIc } from '@/components/icons'
 
 export function ListIndicators() {
   const indicators = useStore((state) => state.indicators)
