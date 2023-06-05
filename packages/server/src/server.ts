@@ -20,8 +20,7 @@ class Server {
     this.app.use(
       cors({
         methods: ['GET', 'POST'],
-        origin: process.env.URL_ORIGIN_ALLOWED,
-        credentials: true,
+        origin: process.env.URL_ORIGIN_ALLOWED
       })
     )
     this.app.use(express.json())
