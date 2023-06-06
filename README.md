@@ -77,29 +77,29 @@ Por último, por cada candidato podrás revisar las preguntas, puntaje y feedbac
 - **Web Speech API**: [Web Speech API](https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesisUtterance)
 - **Reconocimiento de voz**: [react-speech-recognition](https://www.npmjs.com/package/react-speech-recognition)
 - **Autenticación**: [Next Middleware](https://nextjs.org/docs/app/building-your-application/routing/middleware) e [Infojobs Auth](https://developer.infojobs.net/documentation/user-oauth2/index.xhtml)
-- **Deployment**: [Vercel](https://www.vercel.com/)
+- **Deployment**: [Vercel](https://www.vercel.com/) y [Railway](https://railway.app/)
 
 ## Configurando API Keys
 
 ### Infojobs
-Las variables se encuentran en el archivo `.env`
+Se usan variables de entorno tanto en los paquetes **client** y **server**. En el caso del client, las variables los encuentras en el archivo `.env` y en el server debes renombrar el archivo `.env.example` a `.env`.
 
 1. Crear una cuenta en [Infojobs developer](https://developer.infojobs.net/).
 2. Click en `Register new App` e ingresa la información que solicita el formulario. Finalizado el registro, podrás ver el `Client ID` y `Client Secret`.
 3. Copiar los variables en `INFOJOBS_CLIENT_ID` e `INFOJOBS_CLIENT_SECRET`. Luego el valor de `INFOJOBS_REDIRECT_URI` debe ser el mismo **Callback URL** que ingresaste en el formulario del paso 2.
-4. Finalmente, ir a [App authentication](https://developer.infojobs.net/documentation/app-auth/index.xhtml) y generar el token usando el formulario. Después copiar el resultado en `INFOJOBS_TOKEN`.
+4. Finalmente, ir a [App authentication](https://developer.infojobs.net/documentation/app-auth/index.xhtml) y generar el token usando el formulario. Después copiar el resultado en `INFOJOBS_TOKEN` del client y server.
 
 ### OpenIA
 
 1. Crear una cuenta en [OpenIA](https://platform.openai.com/account/api-keys).
-2. Click en `Create new secret key` y copia el valor en `OPEN_IA_KEY`.
+2. Click en `Create new secret key` y copia el valor en `OPEN_IA_KEY` en el package server.
 
 ### Supabase
 
 1. Crear una cuenta en [Supabase](https://supabase.com/dashboard).
 2. Crear un proyecto e ingresar la información solicitada en el formulario.
 3. Finalizado la creación del proyecto, ir a `Project Settings` en el menu lateral.
-4. En la opción `API`, copiar y pegar el `anon public` y `URL` en `SUPABASE_URL` Y `SUPABASE_KEY`.
+4. En la opción `API`, copiar y pegar el `anon public` y `URL` en `SUPABASE_URL` Y `SUPABASE_KEY` del client y server.
 
 ## Ejecutar localmente
 
