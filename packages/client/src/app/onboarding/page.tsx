@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { DayMomentNight } from '../../components/illustrations'
+import { DayMomentNight } from '@/components/illustrations'
 
 export default function Onboarding() {
   return (

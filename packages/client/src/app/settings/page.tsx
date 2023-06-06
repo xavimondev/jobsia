@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { CheckingSettings } from '../../components/illustrations'
-import { CheckMedia } from '../../components/settings/check-media'
+import { CheckingSettings } from '@/components/illustrations'
+import { CheckMedia } from '@/components/settings/check-media'
 
 export default function Settings({
   searchParams: { offerId }

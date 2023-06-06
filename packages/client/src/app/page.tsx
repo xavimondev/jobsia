@@ -1,9 +1,9 @@
 'use client'
 import { redirect } from 'next/navigation'
 import Link from 'next/link'
-import { SearchForm } from '../components/search-form'
-import { ListSuggestions } from '../components/list-suggestions'
-import { DashboardIc } from '../components/icons'
+import { SearchForm } from '@/components/search-form'
+import { ListSuggestions } from '@/components/list-suggestions'
+import { DashboardIc } from '@/components/icons'
 
 const handleSubmit = (query: string) => {
   redirect(`/jobs?q=${encodeURIComponent(query)}`)
